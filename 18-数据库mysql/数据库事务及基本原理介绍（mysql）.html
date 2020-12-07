@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库事务及基本原理介绍（mysql）</title>
+    <style type="text/css" media="all">
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        color: #777;
+        background-color: white;
+      }
+      .container {
+        width: 700px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .post {
+        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
+        position: relative;
+        padding: 70px;
+        bottom: 0;
+        overflow-y: auto;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 25px;
+        color: #515151;
+      }
+
+      .post h1{
+        font-size: 50px;
+        font-weight: 500;
+        line-height: 60px;
+        margin-bottom: 40px;
+        color: inherit;
+      }
+
+      .post p {
+        margin: 0 0 35px 0;
+      }
+
+      .post img {
+        border: 1px solid #D9D9D9;
+      }
+
+      .post a {
+        color: #28A1C5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="post">
+        <h1 class="title">数据库事务及基本原理介绍（mysql）</h1>
+        <div class="show-content">
+          <h1>事务定义</h1><p>数据库事务(DatabaseTransaction) ，事务是由一系列对系统中数据进行访问与更新的操作所组成的一个程序执行逻辑单元，要么完全地执行，要么完全地不执行。通过将一组相关操作组合为一个要么全部成功要么全部失败的单元，可以简化错误恢复并使应用程序更加可靠。一个逻辑工作单元要成为事务，必须满足所谓的ACID（原子性、一致性、隔离性和持久性）属性。</p><hr><h3><i>原子性（Atomicity）</i></h3><p>事务的原子性是指事务必须是一个原子的操作序列单元。事务中包含的各项操作在一次执行过程中，只允许出现两种状态之一。</p><p>•全部执行成功</p><p>•全部执行失败</p><p>任何一项操作都会导致整个事务的失败，同时其它已经被执行的操作都将被撤销并回滚，只有所有的操作全部成功，整个事务才算是成功完成。</p><h3>
+<i>一致性（Consistency）</i><br>
+</h3><p>事务执行的结果必须是使数据库从一个一致性状态变到另一个一致性状态。保证数据库一致性是指当事务完成时，必须使所有数据都具有一致的状态（如 B 树索引或双向链表）。在关系型数据库中，所有的规则必须应用到事务的修改上，以便维护所有数据的完整性。</p><p>读一致性：事务提交前，在当前事务中读取的是更新后的值，而其它事务读取的是更新前的值。</p><p>某些维护一致性的责任由应用程序开发人员承担，例如，如果从A账户转账到B账户，不能只是A账户扣了钱，而B账户没有加钱。</p><h3>
+<i>隔离性（Isolation）</i><br>
+</h3><p>事务的隔离性是指在并发环境中，并发的事务是互相隔离的，一个事务的执行不能被其它事务干扰。也就是说，不同的事务并发操作相同的数据时，每个事务都有各自完整的数据空间。</p><p>一个事务内部的操作及使用的数据对其它并发事务是隔离的，并发执行的各个事务是不能互相干扰的。</p><h3>
+<i>持久性（Duration）</i><br>
+</h3><p>事务的持久性是指事务一旦提交后，数据库中的数据必须被永久的保存下来。即使服务器系统崩溃或服务器宕机等故障。只要数据库重新启动，那么一定能够将其恢复到事务成功结束后的状态。</p><h1>事务并发问题<br>
+</h1><p>数据库在不同的隔离性级别下并发访问可能会出现以下几种问题：</p><p>•第一类、第二类更新丢失(第一类不会出现)</p><p>•脏读（DirtyRead）</p><p>•不可重复读（UnrepeatableRead）</p><p>•幻读（PhantomRead）</p><hr><h3><i>第一类更新丢失</i></h3><div class="image-package">
+<img class="uploaded-img" src="http://upload-images.jianshu.io/upload_images/9025957-16092b7e2d39ec59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="auto" height="auto"><br><div class="image-caption">A事务在撤销时，“不小心”将B事务已经转入账户的金额给抹去了。标准定义的所有隔离级别都不允许第一类丢失更新发生。</div>
+</div><h3><i>第二类更新丢失</i></h3><div class="image-package">
+<img class="uploaded-img" src="http://upload-images.jianshu.io/upload_images/9025957-194238a855779018.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="auto" height="auto"><br><div class="image-caption">第二类丢失更新，实际上和不可重复读是同一种问题。</div>
+</div><h3><i>脏读</i></h3><div class="image-package">
+<img class="uploaded-img" src="http://upload-images.jianshu.io/upload_images/9025957-e9263e143e659f52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="auto" height="auto"><br><div class="image-caption">一个事务读取到了另一个事务未提交的数据操作结果。</div>
+</div><h3><i>不可读重复</i></h3><div class="image-package">
+<img class="uploaded-img" src="http://upload-images.jianshu.io/upload_images/9025957-10c443731f01be7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="auto" height="auto"><br><div class="image-caption">
+
+
+
+
+
+
+一个事务对同一行数据重复读取两次，但是却得到了不同的结果。
+
+
+
+
+
+</div>
+</div><h3><i>幻读</i></h3><div class="image-package">
+<img class="uploaded-img" src="http://upload-images.jianshu.io/upload_images/9025957-cbbd286c34381636.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="auto" height="auto"><br><div class="image-caption">
+
+
+
+
+
+
+事务在操作过程中进行两次查询，第二次查询的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。
+
+
+
+
+
+</div>
+</div><h1>事务隔离级别<br>
+</h1><p>事务并发可以使用隔离级别控制处理，在标准SQL规范中，定义了4个事务隔离级别，不同的隔离级别对事务的处理不同。4个隔离级别是：</p><p>•读未提交（READ_UNCOMMITTED）</p><p>•读已提交（READ_COMMITTED）</p><p>•可重复读（REPEATABLE_READ）</p><p>•序列化（SERIALIZABLE）</p><p>隔离级别其实就是通过一定的机制和锁来避免之前的并发问题。</p><hr><h3><i>隔离级别避免的问题</i></h3><div class="image-package">
+<img class="uploaded-img" src="http://upload-images.jianshu.io/upload_images/9025957-26ddcc9f9e6d632b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="auto" height="auto"><br><div class="image-caption"></div>
+</div><p><b>隔离级别越高并发性能越低。</b></p><h3><b><i>读未提交（READ_UNCOMMITTED）</i></b></h3><p>允许脏读取，但不允许更新丢失。如果一个事务已经开始写数据，则另外一个事务则不允许同时进行写操作，但允许其他事务读此行数据。该隔离级别可以通过“排他写锁”实现。</p><h3><i>读已提交（READ_COMMITTED）</i></h3><p>允许不可重复读取，但不允许脏读取。这可以通过“瞬间共享读锁”和“排他写锁”实现。读取数据的事务允许其他事务继续访问该行数据，但是未提交的写事务将会禁止其他事务访问该行。</p><p>在事务A中读取数据时对记录添加共享锁，但读取结束立即释放。其它事务 B对这个记录的试图修改会一直等待直到A中的读取过程结束，而不需要整个事务A的结束。所以，在事务 A的不同阶段对同一记录的读取结果可能是不同的。</p><p>mysql利用mvcc系统，当事务A和事务B同时存在时,当事务A对数据库某条数据进行修改时(未commit提交)，虽然该条数据存在写锁，但因为mvcc存在，事务B可以读取当前版本(最新commit的版本)的数据库信息。MVCC只工作在REPEATABLE READ和READ COMMITED隔离级别下。</p><h3><i>可重复读（REPEATABLE_READ）</i></h3><p>禁止不可重复读取和脏读取，但是有时可能出现幻读数据。这可以通过“共享读锁”和“排他写锁”实现。读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其他事务。</p><p>mysql利用mvcc系统，当事务A和事务B同时存在时，当事务A对数据库某条数据进行修改时(未commit提交)，虽然该条数据存在写锁，但因为mvcc存在，事务B可以读取当前版本(最新commit的版本)的数据库信息。</p><p>但是当事务B也对该条数据进行修改时，因为写锁存在，不能对数据进行修改，只有当事务A提交后,才能对数据进行操作(当事务A提交后，事务B会自动提交，但是修改语句不会执行，会报错)。</p><h3><i>序列化（SERIALIZABLE）</i></h3><p>提供严格的事务隔离。它要求事务序列化执行，事务只能一个接着一个地执行，不能并发执行。仅仅通过“行级锁”是无法实现事务序列化的，必须通过其他机制保证新插入的数据不会被刚执行查询操作的事务访问到。</p><p>事务强制排序，使用表单锁，事务执行完成后，释放表单锁，下个事务才能对表单进行操作。</p><h3><i>隔离级别使用</i></h3><p>隔离级别越高，越能保证数据的完整性和一致性，但是对并发性能的影响也越大。对于多数应用程序，可以优先考虑把数据库系统的隔离级别设为Read</p><p>Committed。它能够避免脏读取，而且具有较好的并发性能。尽管它会导致不可重复读、幻读和第二类丢失更新这些并发问题，在可能出现这类问题的个别场合，可以由应用程序采用悲观锁或乐观锁来控制。</p><h1>悲观锁</h1><p>悲观锁，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度。因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制。也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统的数据访问层中实现了加锁机制，也无法保证外部系统不会修改数据。</p><p>PS:从数据一开始查询的时候就是用select… where … for udpate</p><p>悲观锁并不是适用于任何场景，它也有它存在的一些不足，因为悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性。如果加锁的时间过长，其他用户长时间无法访问，影响了程序的并发访问性，同时这样对数据库性能开销影响也很大，特别是对长事务而言，这样的开销往往无法承受。所以与悲观锁相对的，我们有了乐观锁。</p><hr><h1>乐观锁</h1><p>乐观锁（ OptimisticLocking ）相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以只会在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了(更新影响行数为0)，则返回用户错误的信息，让用户决定如何去做。</p><p>一般使用版本号或类似版本号(ps：时间戳、数据状态类信息)，通常为数据库表增加一个数字类型的“version”字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据（更新影响行数为0）</p><p>Update… set … where version = oldversion ….</p><hr><p>结束语</p><p>如有描述错误还请留言指正。</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

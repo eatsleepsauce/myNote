@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIT日常(参考)</title>
+    <style type="text/css" media="all">
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        color: #777;
+        background-color: white;
+      }
+      .container {
+        width: 700px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .post {
+        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
+        position: relative;
+        padding: 70px;
+        bottom: 0;
+        overflow-y: auto;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 25px;
+        color: #515151;
+      }
+
+      .post h1{
+        font-size: 50px;
+        font-weight: 500;
+        line-height: 60px;
+        margin-bottom: 40px;
+        color: inherit;
+      }
+
+      .post p {
+        margin: 0 0 35px 0;
+      }
+
+      .post img {
+        border: 1px solid #D9D9D9;
+      }
+
+      .post a {
+        color: #28A1C5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="post">
+        <h1 class="title">GIT日常(参考)</h1>
+        <div class="show-content">
+          <h3>安装git<br>
+</h3><p>linux系统一般有自带git的，可以通过 sudo apt-get install git 命令来安装git</p><p>使用git命令来查看是否安装git</p><p>设置GIT的账号邮箱还有SSH key，后期补充</p><p>为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，</p><p>GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，</p><p>一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。</p><h3>本地版本库</h3><p>本地创建版本库（即仓库repository，工作区）步骤，新建一个文件目录，执行git init，自动创建了master分支，master是主分支。</p><p>git add xxx.xx (文件名格式，多个文件空格隔开) 告诉Git，把文件添加到仓库，其实是暂存区</p><p>git commit -m "xxxx"(备注信息) 告诉Git，把文件提交到仓库</p><p>git diff xxx.xx 查看修改后和上次提交的不同之处</p><p>git log 查看提交日志，加上 --pretty=oneline 此参数日志信息更简洁直观，log信息可以看每次提交的id信息方便回滚。</p><p>git reflog 记录了每一次命令日志，方便查看操作日志和恢复(含有各个命令的id信息)</p><p>在Git中，用HEAD表示当前版本，，上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100</p><p>git reset --hard HEAD^(或者是commit的版本id信息，id不用写全能检索出唯一就够，id也可以使用^和head一样)</p><h3>工作区和暂存区</h3><p>工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。</p><p>Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的</p><p>一个指针叫HEAD。</p><p>第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区；</p><p>第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。因为我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，</p><p>所以这时的git commit就是往master分支上提交更改。</p><p>git checkout -- file            --可以丢弃工作区的修改（修改内容尚未add），让这个文件回到最近一次git commit或git add时的状态。</p><p>git reset HEAD file             --可以把暂存区的修改撤销掉（unstage），重新放回工作区。</p><p>git rm xxx.xx 									--删除文件后，并且git commit提交，如果误删可以通过checkout还原文件。</p><h3>远程仓库</h3><p>（远程库不修改的话一般默认名字origin）</p><p>1、本地先有版本库信息，要让本地版本库信息和远程仓库同步。第一步git托管服务器上新建一个空的仓库（不要勾选初始化）得到远程库的git地址信息；</p><p>第二步，通过git remote add origin xxxx.git(远程仓库git信息)添加远程仓库关联；第三步，通过 git push -u origin master 推到远程仓库master分支。</p><p>2、如果已经非空的远程仓库信息（初始化过的），直接使用 git clone xxx.git</p><h3>分支</h3><p>一开始的时候，master分支(默认分支，主分支)是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点。</p><p>当我们创建新的分支（最初是基于master），例如dev时，Git新建了一个指针叫dev，指向master相同的提交点，再把HEAD指向dev，就表示当前分支在dev上。</p><p>git checkout -b dev(分支)       --创建分支并切换到改分支</p><p>git branch dev(分支)            --创建分支</p><p>git checkout dev(分支)          --切换分支</p><p>git merge dev(分支)             --合并指定分支到当前分支</p><p>git branch -a                   --查看所有分支，本地和远程</p><p>git branch                      --查看本地分支</p><p>git branch -r                   --查看远程分支</p><p>git branch -d xxx               --删除本地某某分支</p><p>git status                      --查看版本库当前状态(切换不同分支查看的是各自的状态信息)</p><h3>分支策略</h3><p>在实际开发中，我们应该按照几个基本原则进行分支管理：首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；</p><p>那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，</p><p>在master分支发布1.0版本；每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p><p>git stash                       --储藏暂时不提交的功能，操作后git status会发现工作区是干净的。可以多次储藏。</p><p>git stash list                  --查看有多少储藏</p><p>git stash apply                 --将储藏恢复到工作分支</p><p>git stash drop                  --删除储藏信息</p><p>git stash pop                   --将储藏恢复到工作分支，同时删除储藏信息</p><p>git stash apply xxx(某个储藏)   --将某个储藏恢复到工作分支</p><h3>多人协作</h3><p>当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。</p><p>git remote                      --查看远程库的信息</p><p>git remote -v                   --显示更详细的远程库信息，显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。</p><p>git push origin dev(本地分支)   --推送本地分支到远程库的分支上，本地分支和远程分支有对应联系才能推送。（checkout下来的远程分支默认有）</p><p>git checkout -b dev(本地分支) origin/dev(远程库的分支)  --创建了远程分支和本地分支，这样本地和远程分支都有关联。</p><p>git push origin dev(本地分支):dev(远程分支)  --创建远程分支</p><p>git push origin :dev(远程分支)  --推送空的分支的到远程分支相当于删除</p><p>git push origin --delete dev(远程分支)  --删除远程分支</p><p>git pull                        --从远程分支上拉取代码</p><p>git branck --set-upstream-to=origin/dev(远程库的分支) dev(本地分支) --如果本地分支和远程库分支没有对应关联，可以通过此命令关联。</p><h3>github使用</h3><p>fetch merge pull</p><p>fork </p><p>tag</p><p>rebase https://www.jianshu.com/p/4a8f4af4e803</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
