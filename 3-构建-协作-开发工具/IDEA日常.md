@@ -1,51 +1,51 @@
 ## 1、常用设置
 **（1）编辑区字体大小随鼠标滚动大小设置**
 preference -> editor ->  gerneral  勾选
-![编辑区字体滚动大小.png](https://upload-images.jianshu.io/upload_images/9025957-7c9d61bdaf8d82b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![编辑区字体滚动大小.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145638.png)
 
 **（2）鼠标悬浮提示**
 preference -> editor ->  gerneral  勾选
-![鼠标悬浮提示.png](https://upload-images.jianshu.io/upload_images/9025957-35702a5993bc979d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![鼠标悬浮提示.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145639.png)
 
 **（3）自动导包和优化多余包**
 preference -> editor ->  gerneral -> auto import  勾选
-![自动导包优化.png](https://upload-images.jianshu.io/upload_images/9025957-fd74de4ec5d0830f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![自动导包优化.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145640.png)
 
 **（4）同一个包下类，超过多少后import合成星号**
 preference -> editor -> codestyle -> java -> imports
-![合成星号.png](https://upload-images.jianshu.io/upload_images/9025957-5e3a1cc517eefcfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![合成星号.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145642.png)
 
 
 **（5）展示行号以及方法间的分隔符**
 preference -> editor -> gerneral -> appearance 勾选
-![展示行及方法分隔线.png](https://upload-images.jianshu.io/upload_images/9025957-fc85bed6c20f42f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![展示行及方法分隔线.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145643.png)
 
 **（6）代码提示时忽略大小写匹配**
 preference -> editor -> gerneral -> code completion 去掉勾选
-![忽略大小写进行提示.png](https://upload-images.jianshu.io/upload_images/9025957-1f012cd69b6723e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![忽略大小写进行提示.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145644.png)
 
 **（7）多个文件打开时能够展示更多文件tab，并且文件tab可以分行展示**
 preference -> editor -> gerneral -> editor tabs
-![多文件展示.png](https://upload-images.jianshu.io/upload_images/9025957-f14bb2a5fefd4582.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![多文件展示.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145645.png)
 
 **（8）修改类头文档注释信息**
 preference -> editor -> file and code templates
-![文档头注释设置.png](https://upload-images.jianshu.io/upload_images/9025957-0e10d2b49dc623a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![文档头注释设置.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145646.png)
 
 **（9）设置项目编码**
 preference -> editor -> file encodings
-![编码设置.png](https://upload-images.jianshu.io/upload_images/9025957-734179f794706a6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![编码设置.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145647.png)
 
 **（10）自动编译**
 preference -> build,execution,deployment -> compiler 勾选
-![自动编译.png](https://upload-images.jianshu.io/upload_images/9025957-4acd32f920ee192d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![自动编译.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145649.png)
 
 **（11）省电模式，不能默认勾选，否则影响一些自动编译**
-![省电模式.png](https://upload-images.jianshu.io/upload_images/9025957-577547d385d2d2ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![省电模式.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145650.png)
 
 **（12）生成序列号版本号**
 preference -> editor -> inspections 勾选
-![自动生成序列化版本号.png](https://upload-images.jianshu.io/upload_images/9025957-1a2a28e36e15eca7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![自动生成序列化版本号.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145652.png)
 
 ##2、常用快捷键
 **第一个为windows环境快捷键，第二个为mac环境快捷键**

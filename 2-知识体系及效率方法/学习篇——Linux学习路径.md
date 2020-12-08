@@ -16,4 +16,4 @@ C 语言 + 数据结构和算法 + 编译原理 + 计算机组成学习操作系
 - 以及最后落到生产实践上。
 
 
-![linux学习路径.jpeg](https://upload-images.jianshu.io/upload_images/9025957-6a687686ced33033.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![linux学习路径.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145825.jpg)

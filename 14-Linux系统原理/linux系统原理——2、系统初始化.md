@@ -4,7 +4,7 @@
 
 ###### **1、计算机逻辑图**
 
-![计算机逻辑图.jpeg](https://upload-images.jianshu.io/upload_images/9025957-f5dd920a19cbd5bb.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![计算机逻辑图.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145719.jpg)
 
 CPU（Central Processing Unit，中央处理器）不是单纯的一块，它包括三个部分，运算单元、数据单元和控制单元。
 
@@ -16,7 +16,7 @@ CPU（Central Processing Unit，中央处理器）不是单纯的一块，它包
 
 ###### **2、CPU和内存如何配合**
 
-![CPU与内存.jpeg](https://upload-images.jianshu.io/upload_images/9025957-20289284a1e803c8.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![CPU与内存.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145721.jpg)
 
 **程序运行的过程中要操作的数据和产生的计算结果，都会放在数据段里面**。CPU怎么执行这些程序，操作这些数据，产生一些结果，并写回内存？
 
@@ -34,11 +34,11 @@ CPU和内存来来回回传数据，靠的是 **总线**。总线主要由两类
 
 很多CPU都是从英特尔8086这款型号CPU开端的，所以统称为x86架构，现在CPU的数据总线和地址总线越来越宽，处理能力越来越强。8086 处理器虽然已经很老了，但是现在操作系统中的很多特性都和它有关，并且一直保持兼容。
 
-![型号和总线.jpg](https://upload-images.jianshu.io/upload_images/9025957-47f7342e18d6f2a8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![型号和总线.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145722.jpg)
 
 
 
-![8086CPU.jpeg](https://upload-images.jianshu.io/upload_images/9025957-500efc97b91b4bfc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![8086CPU.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145723.jpg)
 
 **数据单元：**
 
@@ -62,7 +62,7 @@ CS就是**代码段寄存器**（Code Segment Register），通过它可以找�
 
 在32位处理器中，有32根地址总线，可以访问4G的内存，使用原来的模式不行了，但是又不能完全抛弃原来的模式，因为这个架构是开放的，那么如何保持兼容呢？
 
-![32位寄存器扩展.jpeg](https://upload-images.jianshu.io/upload_images/9025957-6f6d23944815b225.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![32位寄存器扩展.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145724.jpg)
 
 （1）通用寄存器16位扩展到32位，依然保留16位和8位的使用方式。（高16位不能分成两个8位使用的原因是因为程序没有基于高位开发的，所以不兼容）
 
@@ -70,7 +70,7 @@ CS就是**代码段寄存器**（Code Segment Register），通过它可以找�
 
 （3）改动比较大的是段寄存器（Segment Register），因为原来8086CPU没有使用16位做一个段的起始地址，而是使用了一个不上不下的20位地址。这样每次都要左移四位，也就意味着段的起始地址不能是任何一个地方，只能是整除16的地方。**所以32位CPU重新定义了 CS、SS、DS、ES，它们任然是16位的，但是不再是段的起始地址。段的起始地址放在内存的某个地方。这个地方是一个表格，表格中的一项项段描述符（Segment Descriptor）才是真正的段起始地址。而段寄存器里面保存的是在这个表格中的哪一项，称为 选择子（Selector）**。
 
-![32位CPU变化.jpeg](https://upload-images.jianshu.io/upload_images/9025957-193ad9a3dd92168e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![32位CPU变化.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145725.jpg)
 
 这样将从段寄存器直接拿到段起始地址，就变成了先间接地从段寄存器找到表格中的一项，再从表格中的一项中拿到段起始地址。这种获取段起始地址段方式就会很灵活了，当然为了快速拿到段的起始地址，段描述符会从内存中拿到CPU的描述符高速缓存器中。
 
@@ -88,7 +88,7 @@ CS就是**代码段寄存器**（Code Segment Register），通过它可以找�
 
 （2）为了基本输入输出设备能够正常使用，需要建立中断向量表和中断服务程序。
 
-![地址空间组成.jpeg](https://upload-images.jianshu.io/upload_images/9025957-d595f414157b3f36.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![地址空间组成.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145726.jpg)
 
 ###### **2、bootloader 时期**
 
@@ -117,7 +117,7 @@ menuentry 'CentOS Linux (3.10.0-862.el7.x86_64) 7 (Core)' --class centos --class
 }
 ```
 
-![启动项.png](https://upload-images.jianshu.io/upload_images/9025957-359f6b631261cf7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![启动项.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145725.png)
 
 
 
@@ -129,7 +129,7 @@ menuentry 'CentOS Linux (3.10.0-862.el7.x86_64) 7 (Core)' --class centos --class
 
 （5）diskboot.img 先加载 **解压缩程序lzma_decompress.img**，再往下就是 **kernel.img (grub内核非linux内核)** ，最后是各个模块对应的镜像。（kernel.img是压缩过的，所以需要 lzma_decompress.img，lzma_decompress.img对应的代码时 startup_raw.S）
 
-![加载顺序.jpeg](https://upload-images.jianshu.io/upload_images/9025957-b82262eb8534b7ed.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![加载顺序.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145728.jpg)
 
 **在真正的解压缩之前，lzma_decompress.img 调用 real_to_prot ，切换到保护模式**。
 
@@ -157,7 +157,7 @@ menuentry 'CentOS Linux (3.10.0-862.el7.x86_64) 7 (Core)' --class centos --class
 
 内核的启动从入口函数 start_kernel() 开始。在init/main.c文件中，start_kernel相当于内核的main函数。这个函数里面是各种各样的初始化函数 xxx_init。
 
-![内核初始化.jpeg](https://upload-images.jianshu.io/upload_images/9025957-60027f2e59cf8c9a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![内核初始化.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145730.jpg)
 
 ###### **1、INIT_TASK(init_task)**
 
@@ -187,7 +187,7 @@ vfs_caches_init()会用来初始化基于内存的文件系统rootfs。在这个
 
 1号进程用 kernel_thread(kernel_init, NULL,CLONE_FS)创建，1号进程对操作系统来讲，具有划时代的意义，一旦有了用户进程就可以做一定的区分，哪些是核心资源，哪些是非核心资源。x86提供了分层的权限机制，把区域分成了4个Ring，越往外权限越低。
 
-![Ring0-4.jpg](https://upload-images.jianshu.io/upload_images/9025957-ecc94b50e6ce1277.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Ring0-4.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145731.jpg)
 
 操作系统很好地利用了这个机制，将能够访问关键资源的代码放在Ring0，我们称为 **内核态(Kernel Model)** ；将普通的程序代码放在Ring3，我们称为 **用户态(User Model)**。
 
@@ -195,9 +195,9 @@ vfs_caches_init()会用来初始化基于内存的文件系统rootfs。在这个
 
 调用过程：用户态 》系统调用 》保存寄存器 》内核态执行系统调用 》恢复寄存器 》返回用户态继续执行
 
-![用户态-内核态-用户态.jpg](https://upload-images.jianshu.io/upload_images/9025957-82bc57a578744966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![用户态-内核态-用户态.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145732.jpg)
 
-![CPU用户态-内核态.jpeg](https://upload-images.jianshu.io/upload_images/9025957-c8525aa2de83d222.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![CPU用户态-内核态.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145733.jpg)
 
 1号进程和普通用户进程不太一样，它是所有普通用户进程的祖宗，刚开始时并没有用户态，所以是从 **内核态到用户态**。它是怎么从内核态回到用户态的？
 
@@ -215,7 +215,7 @@ glibc还有一个脚本 make-syscall.sh，根据syscall.list里面的配置对�
 
 ###### **1、32位系统调用**
 
-![32系统调用.jpg](https://upload-images.jianshu.io/upload_images/9025957-b5aa8ca249a3919a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![32系统调用.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145734.jpg)
 
 ```
 /* Linux takes system call arguments in registers:
@@ -287,7 +287,7 @@ static __always_inline void do_syscall_32_irqs_on(struct pt_regs *regs)
 
 ###### **2、64位系统调用**
 
-![64系统调用.jpg](https://upload-images.jianshu.io/upload_images/9025957-a8a1a38ea0a75fd2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![64系统调用.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145735.jpg)
 
 ```
 /* The Linux/x86-64 kernel expects the system call parameters in
@@ -392,4 +392,4 @@ __visible void do_syscall_64(struct pt_regs *regs)
 
 ###### **4、完整的64位系统调用**
 
-![64位系统调用全过程.jpg](https://upload-images.jianshu.io/upload_images/9025957-f8a61ee1ce6040a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![64位系统调用全过程.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145736.jpg)

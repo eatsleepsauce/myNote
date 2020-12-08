@@ -62,7 +62,7 @@ int main ()
 
 在linux下面，二进制的程序有严格的格式，这个格式为ELF（Executeable and Linkable Format，可执行与可链接格式）。
 
-![编译过程.jpeg](https://upload-images.jianshu.io/upload_images/9025957-617e44d41db90860.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![编译过程.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145704.jpg)
 
 编译两个.c结尾的源文件，在编译的时候，先做预处理工作，例如将头文件嵌入到正文中，主要是将定义的宏展开，然后才是真正的编译过程，最终编译成 **.o的目标文件**，这是 **ELF的第一种类型**，**可重定位文件（Relocatable File）**。
 
@@ -73,7 +73,7 @@ gcc -c -fPIC createprocess.c
 
 文件格式：
 
-![目标文件.oELF第一种类型.jpg](https://upload-images.jianshu.io/upload_images/9025957-7b2c38769feebe89.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![目标文件.oELF第一种类型.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145705.jpg)
 
 （1）ELF文件的头是用于描述整个文件的，格式在内核中有定义，分别为struct elf32_hdr 和 struct elf64_hdr。
 
@@ -113,7 +113,7 @@ gcc -o staticcreateprocess createprocess.o -L. -lstaticprocess
 
 形成的二进制文件叫**可执行文件**，是 **ELF的第二种格式**，格式如下
 
-![可执行文件ELF的第二种类型.jpg](https://upload-images.jianshu.io/upload_images/9025957-ccd8fa560278b44f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![可执行文件ELF的第二种类型.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145706.jpg)
 
 这个格式和.o文件大致相似，静态链接库一旦链接进去，代码和变量的section都合并了，因而程序运行的时候，就不依赖这个库是否存在。但是这样有一个缺点，就是相同的代码段，如果被多个程序使用的话，在内存里面就有多份，一旦静态链接库更新了，如果二进制可执行文件不重新编译，也就不会随着更新了。
 
@@ -147,7 +147,7 @@ GOT怎么知道地址呢，对于create_process函数，GOT一开始就会创建
 
 ###### **3、运行程序为进程**
 
-![程序到进程.jpeg](https://upload-images.jianshu.io/upload_images/9025957-b303ff4b6583cd72.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![程序到进程.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145707.jpg)
 
 图右边的文件是编译过程，生产so文件和可执行文件，放在硬盘上，图的左边用户态的进程A 执行fork，创建进程B，在进程B的处理逻辑中，执行了 exec 系列系统调用，这个系统调用会通过 load_elf_binary 方法，将刚才生成的可执行文件，加载到进程B的内存中执行。
 
@@ -167,7 +167,7 @@ exec这个系列比较特殊，它是一组函数：
 
 所有进程都是从父进程fork过来的，总归有一个祖宗进程，就是我们系统启动的init进程。
 
-![进程树.jpeg](https://upload-images.jianshu.io/upload_images/9025957-363b4e65be2fa8d1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![进程树.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145713.jpg)
 
 1号进程时/sbin/init，在cenOS7中，这个进程是被软链接到systemd的。ls -l  /sbin/init
 
@@ -298,7 +298,7 @@ gcc download.c -lpthread
 
 **普通线程的创建和运行过程：**
 
-![线程创建和运行过程.jpg](https://upload-images.jianshu.io/upload_images/9025957-544aad59f955e37a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![线程创建和运行过程.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145715.jpg)
 
 ###### **2、线程的数据**
 
@@ -334,7 +334,7 @@ void *pthread_getspecific(pthread_key_t key)
 
 线程退出的时候，就会调用析构函数释放value。
 
-![线程访问的数据.jpg](https://upload-images.jianshu.io/upload_images/9025957-341147993b2f02e3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![线程访问的数据.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145716.jpg)
 
 
 
@@ -415,7 +415,7 @@ int main(int argc, char *argv[])
 
 Mutex 互斥锁使用流程示意：
 
-![mutex互斥锁流程.jpg](https://upload-images.jianshu.io/upload_images/9025957-2ab7fb41bea582b9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![mutex互斥锁流程.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145717.jpg)
 
 ###### **2、条件变量和互斥锁配合使用**
 
@@ -509,12 +509,12 @@ int main(int argc, char *argv[])
 
 互斥锁和条件变量示意图：
 
-![metux互斥和条件变量.jpeg](https://upload-images.jianshu.io/upload_images/9025957-ac8ca798ce568738.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![metux互斥和条件变量.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145718.jpg)
 
 ###### **4、多线程程序编写套路**
 
 主要是 创建线程的套路、mutex使用的套路、条件变量使用的套路。
 
-![多线程程序编写套路.png](https://upload-images.jianshu.io/upload_images/9025957-4f43f8ade488a20e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![多线程程序编写套路.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145718.png)
 
 

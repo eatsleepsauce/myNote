@@ -22,11 +22,11 @@
 
 ###### **2、示意图**
 
-![操作系统内核体系结构.jpeg](https://upload-images.jianshu.io/upload_images/9025957-e7b77b0781296feb.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+![操作系统内核体系结构.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145737.jpg) 
 
 ##### 二、快速上手命令
 
-![快速上手命令.jpg](https://upload-images.jianshu.io/upload_images/9025957-ed07286c123b9a39.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+![快速上手命令.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145738.jpg) 
 
 ##### 三、常见系统调用
 
@@ -122,4 +122,4 @@ Linux内核里由对网络协议栈的实现，网络服务是通过Socket来提
 
 Glibc 是 Linux 下使用的开源的标准 C 库，它是 GNU 发布的 libc 库。Glibc 为程序员提供丰富的 API，除了例如字符串处理、数学运算等用户态服务之外，最重要的是封装了操作系统提供的系统服务，即 **系统调用的封装**。
 
-![Linux系统调用.jpg](https://upload-images.jianshu.io/upload_images/9025957-9163c510c5d258e0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Linux系统调用.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145739.jpg)

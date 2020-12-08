@@ -3,7 +3,7 @@
 - 由支持servlet的web服务器调用和启动运行（如：Tomcat）
 - 一个servlet负责对应的一个或一组url访问请求，并返回相应的内容
 
-![servlet.png](https://upload-images.jianshu.io/upload_images/9025957-0d430f897130c5ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![servlet.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145739.png)
 
 **(1)、servlet实现使用**
 创建一个普通的java文件，继承HttpServlet，可以重写service方法，或重写doXX方法。在WEB-INFO下的web.xml中添加请求与servlet类的映射关系。
@@ -34,23 +34,23 @@ HTTP：超文本传输协议(Hyper Text Transfer Protocol)
 5、支持B/S和C/S架构
 **注意：HTTP1.1版本之后支持可持续连接**
 
-![http1.1.png](https://upload-images.jianshu.io/upload_images/9025957-10d7d0bd4130bf35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![http1.1.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145740.png)
 
 **(1)、http请求格式**
-![请求.png](https://upload-images.jianshu.io/upload_images/9025957-9c27732972d9ef71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![请求.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145741.png)
 
 **(2)、http请求方法**
-![方法.png](https://upload-images.jianshu.io/upload_images/9025957-b3d67321eaa38b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![方法.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145742.png)
 
 1、get请求参数是直接显示在地址栏的，而post在地址栏不显示
 2、get方式不安全，post安全
 3、get请求参数有长度限制，post没有限制
 
 **(3)、http响应格式**
-![响应.png](https://upload-images.jianshu.io/upload_images/9025957-7c5d9a0320c5ba5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![响应.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145743.png)
 
 **(4)、http响应状态码**
-![image.png](https://upload-images.jianshu.io/upload_images/9025957-d33771e845d9970a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145744.png)
 
 >200 OK //客户端请求成功
 400 Bad Request //客户端请求有语法错误，不能被服务器所理解
@@ -248,7 +248,7 @@ public class MyServlet extends MyHttpServlet{
 ```
 **(4)、测试**
 运行MyServer，浏览器中输入 “http://127.0.0.1:8888/test”，测试结果：
-![测试结果.png](https://upload-images.jianshu.io/upload_images/9025957-14feb7bc65331837.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![测试结果.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145745.png)
 
 ##4、HttpServletRequest和HttpServletResponse
 **(1)、HttpServletRequest**
@@ -296,7 +296,7 @@ HttpServletResponse对象是服务器的响应对象，这个对象中封装了�
 - request和response对象只有一个，请求转发过程中servlet之间共享。
 - 对客户端透明
 - 只能跳转本站资源
-![请求转发.png](https://upload-images.jianshu.io/upload_images/9025957-c075e5dacd9fb59c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![请求转发.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145746.png)
 
 
 **不同的servlet之间共享数据可以通过request.setAttribute("","")和request.getAttribute("");实现。**
@@ -316,7 +316,7 @@ HttpServletResponse对象是服务器的响应对象，这个对象中封装了�
 - cookie是在浏览器访问服务器的某个资源时，由web服务器在响应头传送给浏览器的数据。
 - cookie只能记录一种信息，是key-value信息。
 - 一个web站点可以给浏览器发送多个cookie，一个浏览器也可以存储多个站点的cookie。
-![cookie.png](https://upload-images.jianshu.io/upload_images/9025957-4d656e3ac35f620e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![cookie.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145747.png)
 
 **cookie基本操作：**
 - cookie创建
@@ -357,7 +357,7 @@ if (cookies != null) {
 - 由服务端进行创建
 - 每个用户独立拥有session对象
 - 默认存储的时间是30分钟
-![session.png](https://upload-images.jianshu.io/upload_images/9025957-4b5b744dca787fd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![session.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145748.png)
 
 **session基本操作：**
 - session创建和获取
