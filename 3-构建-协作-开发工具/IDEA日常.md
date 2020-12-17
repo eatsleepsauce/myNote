@@ -37,7 +37,7 @@ preference -> editor -> gerneral -> editor tabs
 **（8）修改类头文档注释信息**
 preference -> editor -> file and code templates
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145646.png" alt="文档头注释设置.png" style="zoom:67%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/2020-12-08-145646.png" alt="文档头注释设置.png" style="zoom:67%;" />
 
 **（9）设置项目编码**
 preference -> editor -> file encodings
