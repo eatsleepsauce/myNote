@@ -1,7 +1,10 @@
 #### Windows环境使用
 第一步：打开 文件》偏好设置》图像 安装Picgo-core
-![image.png](https://upload-images.jianshu.io/upload_images/9025957-d884aa0efb924ed6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+<img src="https://upload-images.jianshu.io/upload_images/9025957-d884aa0efb924ed6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" style="zoom: 67%;" />
+
 第二步：配置Pigo-core 设置图床配置信息，可以使用阿里云OSS，价格还行，不过要做好防盗链，万一被盗链，流量和请求数被刷爆就不好了，当然不发布到网络的话自己用没什么问题的。如果发布到网上最好迁移图床(有钱可以忽略)，正常Pigo-core 配置如下：
+
 ```
 {
   "picBed": {
@@ -19,10 +22,15 @@
   "picgoPlugins": {}
 }
 ```
-![image.png](https://upload-images.jianshu.io/upload_images/9025957-4d6b9d8d54bf510f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+<img src="https://upload-images.jianshu.io/upload_images/9025957-4d6b9d8d54bf510f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" style="zoom: 67%;" />
+
+
 
 第三步：验证是否成功设置
-![image.png](https://upload-images.jianshu.io/upload_images/9025957-b9327cae91b6657c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+<img src="https://upload-images.jianshu.io/upload_images/9025957-b9327cae91b6657c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" style="zoom:67%;" />
+
+
 
 
 #### Mac环境使用

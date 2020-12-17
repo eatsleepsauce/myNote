@@ -8,7 +8,7 @@ Maven仓库是基于简单文件系统存储的，集中化管理构件(java api
 
 **仓库分类：本地仓库和远程仓库**
 
-![仓库分类.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145700.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145700.png" alt="仓库分类.png" style="zoom:50%;" />
 
 **远程仓库**，不在本地的仓库都是远程仓库，而远程仓库又分为：中央仓库和私服仓库。远程仓库是指通过各种协议，如file://、http://或其它访问的仓库。这些仓库可能是第三方搭建的真实远程仓库（例如repo.maven.apache.org和uk.maven.org是maven的中央仓库），用来提供他们的构件下载。其它远程仓库可能是自己的公司的内部仓库（公司局域网内搭建的maven仓库，也就是私服仓库），用来在开发团队间共享私有构件和管理发布的。
 默认的远程仓库使用的是apache提供的中央仓库：https://mvnrepository.com/
@@ -19,7 +19,8 @@ Maven必须要知道至少一个可用的远程仓库，中央仓库就是这样
 **本地仓库**，指的本地一份拷贝，包含缓存的远程下载以及自己生成的临时构件。
 
 **仓库优先级（简单粗暴，未考虑存在多个远程库的情况）**，最先从本地仓库开始查询构件，如果没有查到则从远程仓库中查询，远程库分两种情况，一种是配置了镜像仓库，另一种是没有配置镜像仓库。
-![仓库优先级.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145701.png)
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145701.png" alt="仓库优先级.png" style="zoom:50%;" />
 
 
 ##3、常用配置
@@ -108,7 +109,7 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
 将会打包成war包，发布在应用服务器上的工程。
 
 **四、Maven工程结构**
-![项目结构.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145702.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145702.png" alt="项目结构.png" style="zoom:67%;" />
 *src/main/java*  这个目录下存储java源码
 *src/main/resources*  存储主要的资源文件，比如xml配置文件以及properties文件
 *src/test/java*  存储测试用的类，比如junit的测试类
@@ -190,9 +191,9 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
 **三、聚合**
 如果我们开发的工程拥有2个以上的module时，每个module都是一个独立的功能集合。这时候我们就需要一个聚合工程了。创建聚合工程的过程中，总工程必须是一个pom工程(jar和war类型的工程没有办法做聚合工程)，各个子模块可以是任意类型。聚合包含了继承的特性。
 
-![总工程pom.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145703.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145703.png" alt="总工程pom.png" style="zoom:67%;" />
 
-![子工程pom.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145704.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145704.png" alt="子工程pom.png" style="zoom: 67%;" />
 
 
 ##6、常见插件

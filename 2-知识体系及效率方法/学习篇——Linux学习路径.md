@@ -15,5 +15,4 @@ C 语言 + 数据结构和算法 + 编译原理 + 计算机组成学习操作系
 - 实验定制 Linux 组件，
 - 以及最后落到生产实践上。
 
-
-![linux学习路径.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145825.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145825.jpg" alt="linux学习路径.jpeg" style="zoom: 67%;" />

@@ -22,7 +22,9 @@
 
 ###### **2、示意图**
 
-![操作系统内核体系结构.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145737.jpg) 
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145737.jpg" alt="操作系统内核体系结构.jpeg" style="zoom:50%;" />
+
+ 
 
 ##### 二、快速上手命令
 

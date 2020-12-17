@@ -62,7 +62,7 @@ int main ()
 
 在linux下面，二进制的程序有严格的格式，这个格式为ELF（Executeable and Linkable Format，可执行与可链接格式）。
 
-![编译过程.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145704.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145704.jpg" alt="编译过程.jpeg" style="zoom:50%;" />
 
 编译两个.c结尾的源文件，在编译的时候，先做预处理工作，例如将头文件嵌入到正文中，主要是将定义的宏展开，然后才是真正的编译过程，最终编译成 **.o的目标文件**，这是 **ELF的第一种类型**，**可重定位文件（Relocatable File）**。
 
@@ -73,7 +73,7 @@ gcc -c -fPIC createprocess.c
 
 文件格式：
 
-![目标文件.oELF第一种类型.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145705.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145705.jpg" alt="目标文件.oELF第一种类型.jpg" style="zoom:50%;" />
 
 （1）ELF文件的头是用于描述整个文件的，格式在内核中有定义，分别为struct elf32_hdr 和 struct elf64_hdr。
 
@@ -113,7 +113,7 @@ gcc -o staticcreateprocess createprocess.o -L. -lstaticprocess
 
 形成的二进制文件叫**可执行文件**，是 **ELF的第二种格式**，格式如下
 
-![可执行文件ELF的第二种类型.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145706.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145706.jpg" alt="可执行文件ELF的第二种类型.jpg" style="zoom:50%;" />
 
 这个格式和.o文件大致相似，静态链接库一旦链接进去，代码和变量的section都合并了，因而程序运行的时候，就不依赖这个库是否存在。但是这样有一个缺点，就是相同的代码段，如果被多个程序使用的话，在内存里面就有多份，一旦静态链接库更新了，如果二进制可执行文件不重新编译，也就不会随着更新了。
 
@@ -298,7 +298,7 @@ gcc download.c -lpthread
 
 **普通线程的创建和运行过程：**
 
-![线程创建和运行过程.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145715.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145715.jpg" alt="线程创建和运行过程.jpg" style="zoom:67%;" />
 
 ###### **2、线程的数据**
 
@@ -334,7 +334,7 @@ void *pthread_getspecific(pthread_key_t key)
 
 线程退出的时候，就会调用析构函数释放value。
 
-![线程访问的数据.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145716.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145716.jpg" alt="线程访问的数据.jpg" style="zoom:67%;" />
 
 
 
@@ -415,7 +415,7 @@ int main(int argc, char *argv[])
 
 Mutex 互斥锁使用流程示意：
 
-![mutex互斥锁流程.jpg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145717.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145717.jpg" alt="mutex互斥锁流程.jpg" style="zoom:67%;" />
 
 ###### **2、条件变量和互斥锁配合使用**
 
@@ -509,7 +509,7 @@ int main(int argc, char *argv[])
 
 互斥锁和条件变量示意图：
 
-![metux互斥和条件变量.jpeg](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145718.jpg)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145718.jpg" alt="metux互斥和条件变量.jpeg"  />
 
 ###### **4、多线程程序编写套路**
 
