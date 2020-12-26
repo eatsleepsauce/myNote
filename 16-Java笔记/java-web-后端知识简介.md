@@ -1,12 +1,17 @@
-##1、servlet简介
+#### web后端知识
+
+##### 一、servlet简介
+
 - servlet是一种web服务器端的编程技术
 - 由支持servlet的web服务器调用和启动运行（如：Tomcat）
 - 一个servlet负责对应的一个或一组url访问请求，并返回相应的内容
 
-![servlet.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145739.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145739.png" alt="servlet.png" style="zoom: 67%;" />
 
-**(1)、servlet实现使用**
+###### 1、servlet实现使用
+
 创建一个普通的java文件，继承HttpServlet，可以重写service方法，或重写doXX方法。在WEB-INFO下的web.xml中添加请求与servlet类的映射关系。
+
 ```
     <!--配置servlet的别名，同时在servlet-class配置项中添加servlet类的完全限定名  包名+类名-->
     <servlet>
@@ -19,38 +24,38 @@
         <url-pattern>/xx</url-pattern>
     </servlet-mapping>
 ```
-**(2)、servlet的生命周期**
+###### 2、servlet的生命周期
+
 servlet生命周期如上图的请求流程，首次请求时由容器创建servlet对象（配置了 load-on-startup的情况有所不同，不一定是请求时创建servlet对象了，有可能是容器启动的时候创建servlet对象，例如 Spring mvc的 DispatcherServlet），执行init()方法，然后调用service方法，容器销毁时会调用destroy方法，后续请求过来时只会执行service方法。init和destroy只会执行一次，init在servlet对象创建后执行（servlet对象在首次请求的时候创建，后面请求过来复用对象）。
 
-##2、http协议简介
+##### 二、http协议简介
 
 HTTP：超文本传输协议(Hyper Text Transfer Protocol)
 作用：规范了浏览器和服务器的数据交互，还有其它...
-特点：
-1、简单快速
-2、灵活
-3、无连接
-4、无状态
-5、支持B/S和C/S架构
+特点：1、简单快速   2、灵活  3、无连接   4、无状态   5、支持B/S和C/S架构
 **注意：HTTP1.1版本之后支持可持续连接**
 
-![http1.1.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145740.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145740.png" alt="http1.1.png" style="zoom: 67%;" />
 
-**(1)、http请求格式**
-![请求.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145741.png)
+###### 1、http请求格式
 
-**(2)、http请求方法**
-![方法.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145742.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145741.png" alt="请求.png" style="zoom: 50%;" />
+
+###### 2、http请求方法
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145742.png" alt="方法.png" style="zoom: 50%;" />
 
 1、get请求参数是直接显示在地址栏的，而post在地址栏不显示
 2、get方式不安全，post安全
 3、get请求参数有长度限制，post没有限制
 
-**(3)、http响应格式**
-![响应.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145743.png)
+###### 3、http响应格式
 
-**(4)、http响应状态码**
-![image.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145744.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145743.png" alt="响应.png" style="zoom:50%;" />
+
+###### 4、http响应状态码
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145744.png" alt="image.png" style="zoom:67%;" />
 
 >200 OK //客户端请求成功
 400 Bad Request //客户端请求有语法错误，不能被服务器所理解
@@ -60,17 +65,24 @@ HTTP：超文本传输协议(Hyper Text Transfer Protocol)
 500 Internal Server Error //服务器发生不可预期的错误
 503 Server Unavailable //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
 
-##3、Tomcat原理简介
+
+
+##### 三、Tomcat原理简介
+
 Tomcat服务器是一款轻量级应用服务器。我们正常开发完一个web应用后，编译打包后得到一个war包，这个war包放入Tomcat的应用程序路径下，启动Tomcat就可以通过http请求访问这个web应用了。
 
-#####Tomcat基本逻辑：
+###### 1、Tomcat基本逻辑：
 
 **(1)、Tomcat启动以后，其实在操作系统中看到的是一个JVM虚拟机进程。**这个虚拟机启动后，加载class进来执行，首先加载的是**org.apache.catalina.startup.Bootstrap类**，这个类里面有一个main()函数，是整个Tomcat的入口函数，JVM虚拟机会启动一个主线程从这个入口函数开始执行。
+
 **(2)、Bootstrap的main()函数开始执行，初始化Tomcat运行环境。**这时候主要是创建一些线程，如负责监听80端口的线程，处理客户端连接请求的线程，以及执行用户请求的线程。创建这些线程的代码是Tomcat代码的一部分。
+
 **(3)、初始化运行环境之后**，Tomcat就会扫描web程序路径，扫描到开发的war包后，再加载war包里面的类到JVM(因为web应用是被Tomcat加载运行的，所以也称Tomcat为Web容器)。
+
 **(4)、外部请求发送到Tomcat**，也就说外部程序通过80端口和Tomcat进行http通信的时候，Tomcat会根据war包中的web.xml配置，决定这个请求url应该由哪个servlet处理，然后Tomcat就会分配一个线程去处理这个请求，实际上，就是这个线程执行响应的servlet代码。
 
-#####Tomcat的目录结构：
+###### 2、Tomcat的目录结构：
+
 - /bin 存放启动和关闭tomcat的可执行文件
 - /conf 存放tomcat的配置文件
 - /lib 存放库文件
@@ -79,8 +91,10 @@ Tomcat服务器是一款轻量级应用服务器。我们正常开发完一个we
 - /webapps 存放web应用
 - /work 存放jsp转换后的servlet文件
 
-#####简单Tomcat实现：
+###### 3、简单Tomcat实现：
+
 **(1)、首先需要一个类似bootstrap的功能类**
+
 ```
 public class MyServer {
 
@@ -250,10 +264,13 @@ public class MyServlet extends MyHttpServlet{
 运行MyServer，浏览器中输入 “http://127.0.0.1:8888/test”，测试结果：
 ![测试结果.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145745.png)
 
-##4、HttpServletRequest和HttpServletResponse
-**(1)、HttpServletRequest**
+##### 四、HttpServletRequest和HttpServletResponse
+
+###### 1、HttpServletRequest
+
 HttpServletRequest对象代表客户端的请求，当客户端通过http协议访问服务器时，http请求中的所有信息都封装在这个对象中，可以通过这个对象获取请求中的数据。
 **常用方法：**
+
 - getRequestURL:获取客户端的完整url
 - getRequestURI:获取请求行中的资源名部分
 - getQueryString:获取请求行的参数部分
@@ -273,9 +290,11 @@ HttpServletRequest对象代表客户端的请求，当客户端通过http协议�
   getParameterNames()
   getParameterMap()
 
-**(2)、HttpServletResponse**
+###### 2、HttpServletResponse
+
 HttpServletResponse对象是服务器的响应对象，这个对象中封装了向客户端发送的数据、响应头以及响应状态码。
 **常用方法：**
+
 - 设置响应头
   setHeader(String key, String value) 添加响应信息，key相同则覆盖
   addHeader(String key, String value) 添加响应信息，key相同不会覆盖
@@ -289,36 +308,58 @@ HttpServletResponse对象是服务器的响应对象，这个对象中封装了�
 - post请求乱码：request.setCharacterEncoding("utf-8");
 - response乱码：response.setCharacterEncoding("utf-8");response.setContentType("text/html;charset=utf-8");
 
-##5、servlet请求转发和重定向
-**(1)、servlet请求转发** request.getRequestDispatcher("servletname").forward(request, response);
+##### 五、servlet请求转发和重定向
+
+###### 1、servlet请求转发 
+
+request.getRequestDispatcher("servletname").forward(request, response);
+
 - 用户只请求一次
+
 - 浏览器地址栏不变化
+
 - request和response对象只有一个，请求转发过程中servlet之间共享。
+
 - 对客户端透明
+
 - 只能跳转本站资源
-![请求转发.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145746.png)
+
+  
+
+  <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145746.png" alt="请求转发.png" style="zoom:67%;" />
 
 
 **不同的servlet之间共享数据可以通过request.setAttribute("","")和request.getAttribute("");实现。**
 
-**(2)、重定向** response.sendRedirect("url");
+###### 2、重定向 
+
+response.sendRedirect("url");
+
 - 浏览器发送两次请求
 - 浏览器地址栏发送变化
 - 请求过程中产生新的request和response对象
 - servlet之间不共享request和response对象
 
-##6、Cookie简介
+##### 六、Cookie简介
+
 *http是一个无状态的协议，当一个客户端向服务端发送请求，在服务器返回响应后，连接就关闭了，在服务器端不保留连接信息。也就是请求A之后的请求B不知道请求A干了什么。*
 
 **当客户端发送多次请求，且需要相同的请求参数时，这时候cookie就非常有用了。**比如，某段时间内免登录。
 **cookie说明：**
 - cookie是一种在客户端保存http状态信息的技术。
+
 - cookie是在浏览器访问服务器的某个资源时，由web服务器在响应头传送给浏览器的数据。
+
 - cookie只能记录一种信息，是key-value信息。
+
 - 一个web站点可以给浏览器发送多个cookie，一个浏览器也可以存储多个站点的cookie。
-![cookie.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145747.png)
+
+  
+
+  <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145747.png" alt="cookie.png" style="zoom:50%;" />
 
 **cookie基本操作：**
+
 - cookie创建
 ```
   Cookie cookie = new Cookie(String key,String value);
@@ -347,19 +388,27 @@ if (cookies != null) {
    }
 }
 ```
-##7、Session简介
+##### 七、Session简介
+
 *Session是一种在服务器端保存http状态信息的技术。*
+
 - Session表示会话，在一段时间内，用户与服务器之间的一系列交互操作。
 - session对象，用户发送不同请求的时候，在服务器端保存不同请求共享数据的存储对象。
 
-**session说明：**
-- session是依赖cookie技术的服务器端的数据存储技术
-- 由服务端进行创建
-- 每个用户独立拥有session对象
-- 默认存储的时间是30分钟
-![session.png](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145748.png)
+###### 1、session说明
 
-**session基本操作：**
+- session是依赖cookie技术的服务器端的数据存储技术
+
+- 由服务端进行创建
+
+- 每个用户独立拥有session对象
+
+- 默认存储的时间是30分钟
+
+  <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145748.png" alt="session.png" style="zoom: 50%;" />
+
+###### 2、session基本操作
+
 - session创建和获取
 ```
 HttpSession session = request.getSession();
@@ -376,7 +425,8 @@ sessoin.setAttribute(String name,Object object);
 session.getAttribute(String name);
 ```
 
-**session常见问题：**
+###### 3、session常见问题
+
 - session创建时机
 (1)、客户端第一次访问jsp文件，jsp被翻译成Servlet时会自动创建Session，此后客户端再次访问就会带着JSESSIONID过来。
 (2)、当客户端重启浏览器时，客户端的JSESSIONID被销毁(此时服务端的Session没有受影响)，客户端再次访问浏览器没有带着JSESSIONID，服务端将再次为客户创建Session。
@@ -400,8 +450,9 @@ cookie禁用后(这个操作不会影响服务端创建cookie添加到响应)，
 (3)、利用cookie记录session
 (4)、session服务器（集群）利用分布式缓存，数据库等，在这些产品的基础上进行包装，使其符合session的存储和访问要求
 
-##8、ServletContext和ServletConfig
-**(1)、ServletContext** *全局共享*
+##### 八、ServletContext和ServletConfig
+
+###### 1、ServletContext 
 
 **ServletContext说明：**
 - ServletContext 对象由服务器进行创建， 一个项目只有一个对象。 不管在项目的任意位置进行获取得到的都是同一个对象， 那么不同用户发起的请求获取到的也就是同一个对象了， 该对象由用户共同拥有。
@@ -443,7 +494,7 @@ context.getContextPath();
 context.getRealPath("web.xml");
 ```
 
-**(2)、ServletConfig对象**
+###### 2、ServletConfig
 
 **ServletConfig说明：**
 *使用ServletContext对象可以获取web.xml中的全局配置文件，在web.xml中，每个Servlet也可以进行单独的配置。*
@@ -478,9 +529,11 @@ while (initParameterNames.hasMoreElements()){
 }
 ```
 
-##9、过滤器
+##### 九、过滤器
+
 **过滤器是能对web请求和web响应的头属性和内容进行操作的一种特殊web组件。**过滤器本身并不直接生成web响应，而是拦截web请求和响应，以便查看、提取或以某种方式操作客户端和服务器之间交换的数据。
 **过滤器主要功能：**
+
 - 分析web请求，对输入数据进行预处理
 - 阻止web请求和响应进行
 - 根据功能改动请求的头信息和数据体
@@ -526,7 +579,8 @@ public class MyFilter implements Filter {
 ```
 **应用场景：**编码格式、登录拦截等
 
-##10、监听器
+##### 十、监听器
+
 **Servlet监听器用于监听一些重要事件的发生，监听器可以在事情发生前、发生后可以做一些必要的处理。**监听器可以通过实现Servlet API提供的Listense接口来创建。
 
 **监听对象**
