@@ -1,39 +1,72 @@
-##1、maven简介
+#### MAVEN 简单使用
+
+##### 一、maven简介
+
 Maven使用项目对象模型(POM Project  Object Model)的概念，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工具。在Maven中每个项目都相当于一个对象，对象与对象之间的关系包含：依赖、继承和聚合。
 
-##2、仓库
+使用说明: https://maven.apache.org/guides/mini/index.html
+
+##### 二、仓库
+
 Maven仓库是基于简单文件系统存储的，集中化管理构件(java api资源)的一个服务。仓库中的任何一个构件都有其唯一的坐标，任何maven项目使用任何一个构件的方式都是相同的。
 
 **Maven可以在某个位置统一存储所有的Maven项目共享的构件，这个统一的位置就是仓库，项目构建完毕后生成的构件可以安装（本地）或者部署（远程）到仓库中，供其它项目使用。**
 
 **仓库分类：本地仓库和远程仓库**
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145700.png" alt="仓库分类.png" style="zoom:50%;" />
+![maven仓库](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/maven仓库.png)
 
-**远程仓库**，不在本地的仓库都是远程仓库，而远程仓库又分为：中央仓库和私服仓库。远程仓库是指通过各种协议，如file://、http://或其它访问的仓库。这些仓库可能是第三方搭建的真实远程仓库（例如repo.maven.apache.org和uk.maven.org是maven的中央仓库），用来提供他们的构件下载。其它远程仓库可能是自己的公司的内部仓库（公司局域网内搭建的maven仓库，也就是私服仓库），用来在开发团队间共享私有构件和管理发布的。
-默认的远程仓库使用的是apache提供的中央仓库：https://mvnrepository.com/
-Maven必须要知道至少一个可用的远程仓库，中央仓库就是这样一个默认的远程仓库。
+###### 1、本地仓库
 
-**私服**是一种特殊的远程Maven仓库，它是架设在局域网内的仓库服务，私服一般被配置为互联网远程仓库的镜像，供局域网内的Maven用户使用。当Maven需要下载构件的时候，先向私服请求，如果私服上不存在该构件，则从外部的远程仓库下载，同时缓存在私服之上，然后为Maven下载请求提供下载服务，另外，对于自定义或第三方的jar可以从本地上传到私服，供局域网内其他maven用户使用。
+指的本地一份拷贝，包含缓存的远程下载以及自己生成的临时构件。
 
-**本地仓库**，指的本地一份拷贝，包含缓存的远程下载以及自己生成的临时构件。
+###### 2、远程仓库
 
-**仓库优先级（简单粗暴，未考虑存在多个远程库的情况）**，最先从本地仓库开始查询构件，如果没有查到则从远程仓库中查询，远程库分两种情况，一种是配置了镜像仓库，另一种是没有配置镜像仓库。
+不在本地的仓库都是远程仓库，而远程仓库又分为：**中央仓库**、**私服** 和 **其它公共库**。Maven必须要知道至少一个可用的远程仓库，中央仓库就是一个默认的远程仓库。
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145701.png" alt="仓库优先级.png" style="zoom:50%;" />
+默认的远程仓库使用的是apache提供的中央仓库。
 
+**其它公共仓库**，其它可以互联网公共访问maven repository，例如 jboss repository等
 
-##3、常用配置
-**这些配置都是修改的 maven目录下conf/settings.xml文件**
-**一、本地库配置**
-本地仓库就是本地的一个目录，用于缓存远程库下载的构件以及自己本地生成的构件。
+**私服 ** 是一种特殊的远程Maven仓库，它是架设在局域网内的仓库服务，私服一般被配置为互联网远程仓库的 **镜像**（镜像只是表示两个仓库的关系，不一定私服做镜像，也可以使用其它公共库镜像其它库），供局域网内的Maven用户使用。当Maven需要下载构件的时候，先向私服请求，如果私服上不存在该构件，则从外部的远程仓库下载，同时缓存在私服之上，然后为Maven下载请求提供下载服务，另外，对于自定义或第三方的jar可以从本地上传到私服，供局域网内其他maven用户使用。
+
+![img](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/004451_1mVB_820500.png)
+
+私服优点主要有：
+
+1. 节省外网宽带
+2. 加速Maven构建
+3. 部署第三方构件
+4. 提高稳定性、增强控制：原因是外网不稳定
+5. 降低中央仓库的负荷：原因是中央仓库访问量太大
+
+###### 3、远程仓库配置读取优先级：
+
+1. Global settings.xml（maven 全局配置）
+2. User settings.xml  (maven 用户配置)
+3. Local POM （本地工程的）
+4. Parent POMs, recursively（递归父POM,其实也是本地工程的POM）
+5. Super POM （中央仓库）
+
+**获取构件过程**:
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/maven仓库访问1.png" alt="maven仓库访问1" style="zoom: 50%;" />
+
+##### 三、常用配置
+
+###### 1、本地库配置
+
+本地仓库就是本地的一个目录，用于缓存远程库下载的构件以及自己本地生成的构件。（全局生效，修改maven目录下conf/settings.xml文件）
+
 ```
  <!-- 本地仓库配置 -->
   <localRepository>具体的本地仓库位置</localRepository>
 ```
 
-**二、镜像仓库配置**
-镜像的主要目的是替换原来远程仓库访问达到较快的访问速度，如阿里云的公共仓库替换中央仓库的访问。
+###### 2、镜像仓库配置
+
+镜像的主要目的是替换原来远程仓库访问达到较快的访问速度，如阿里云的公共仓库替换中央仓库的访问。（全局生效，修改maven目录下conf/settings.xml文件）
+
 ```
  <mirror>
       <!-- 镜像的id，可以自己指定-->
@@ -52,8 +85,66 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
 \*,!repo1          所有远程仓库都从该镜像获取，除 repo1 远程仓库以外
 \*                     所用远程仓库都从该镜像获取
 
-**三、jdk配置**
+###### 3、远程库配置
+
+（1）local pom.xml 配置
+
+```
+<repositories>    
+    <repository>      
+       <id>nexus</id>      
+       <name>nexus私服URL</name>      
+       <url>http://127.0.0.1:8081/repository/maven-public/</url>    
+    </repository>    
+    <repository>
+        <id>aliyun</id>
+        <name>阿里云</name> 
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+    </repository> 
+</repositories> 
+```
+
+（2）setting.xml 文件配置
+
+```
+<profiles>
+<profile>
+    <id>my</id>
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>   
+        <repository>      
+            <id>nexus</id>      
+            <name>nexus私服URL</name>      
+            <url>http://127.0.0.1:8081/repository/maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+</profile>
+</profiles>
+<activeProfiles>
+  <activeProfile>my</activeProfile>
+</activeProfiles>
+```
+
+###### 4、jdk配置
+
 指定编译和运行时的jdk，这里是全局性的，也可以在具体的maven项目中指定某个版本的jdk。
+
 ```
 <profile>
         <id>jdk-1.8</id>
@@ -70,7 +161,8 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
 
 ```
 
-##4、工程类型以及工程结构
+##### 四、工程类型以及工程结构
+
 ```
     <groupId>com.test.ly</groupId>
     <artifactId>MavenDemo</artifactId>
@@ -78,8 +170,10 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
     <!-- 这里的还可以是 jar  war-->
     <packaging>pom</packaging>
 ```
-**一、POM工程**
+###### 1、POM工程
+
 POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar包的版本控制。
+
 ```
     <modules>
         <module>SubModule</module>
@@ -102,14 +196,20 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
     </dependencyManagement>
 ```
 
-**二、JAR工程**
+###### 2、JAR工程
+
 将会打包成jar，用作jar包使用。
 
-**三、WAR工程**
+###### 3、WAR工程
+
 将会打包成war包，发布在应用服务器上的工程。
 
-**四、Maven工程结构**
+###### 4、Maven工程结构
+
+
+
 <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145702.png" alt="项目结构.png" style="zoom:67%;" />
+
 *src/main/java*  这个目录下存储java源码
 *src/main/resources*  存储主要的资源文件，比如xml配置文件以及properties文件
 *src/test/java*  存储测试用的类，比如junit的测试类
@@ -117,10 +217,14 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
 *target*  项目编译后内容存放位置
 *pom.xml*  maven的基础配置文件，配置项目和项目之间的关系，包括配置依赖关系等
 
-##5、工程关系：依赖、继承、聚合
+##### 五、工程关系：依赖、继承、聚合
+
 **maven工程的关系都在工程中的pom.xml配置文件中体现。**
-**一、依赖**
+
+###### 1、依赖
+
 依赖很简单，就是说工程需要依赖什么构件(jar)，代码示例如下：
+
 ```
     <dependencies>
         <dependency>
@@ -182,26 +286,32 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
     </dependencyManagement>
 ```
 
+###### 2、继承
 
-**二、继承**
 如果A工程继承B工程，则代表A工程默认依赖B工程依赖的所有资源，被继承的工程一般只能是POM工程。
 一般情况下POM工程都是将依赖放置到<dependencyManagement>中，在此标签中的依赖，只有在子工程明确依赖的时候才会生效，否则不能直接使用。如果直接使用<dependencies>则可以保证所有的子工程都继承依赖关系并且是依赖直接生效的，无需再添加依赖。
 依赖内容放置在<dependencyManagement>中的主要目的是进行依赖的版本管理。
 
-**三、聚合**
+###### 3、聚合
+
 如果我们开发的工程拥有2个以上的module时，每个module都是一个独立的功能集合。这时候我们就需要一个聚合工程了。创建聚合工程的过程中，总工程必须是一个pom工程(jar和war类型的工程没有办法做聚合工程)，各个子模块可以是任意类型。聚合包含了继承的特性。
 
 <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145703.png" alt="总工程pom.png" style="zoom:67%;" />
 
 <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145704.png" alt="子工程pom.png" style="zoom: 67%;" />
 
+##### 六、常见插件
 
-##6、常见插件
-**一、编译器插件**
-**二、资源插件**
-**三、tomcat插件**
+插件构件获取的过程和普通构件不太一样, 插件从 中央仓库 或 本地pom 中 pluginRepository中配置的远程仓库中获取, 默认是从中央仓库获取, 当然也可以使用镜像代替中央仓库.
 
-##7、常见命令
+###### 1、编译器插件
+
+###### 2、资源插件
+
+###### 3、tomcat插件
+
+##### 七、常见命令
+
 **install**    本地安装，包含编译、打包和安装到本地仓库
 **compile**   仅编译
 **package**  包含编译和打包
