@@ -14,7 +14,7 @@ Maven仓库是基于简单文件系统存储的，集中化管理构件(java api
 
 **仓库分类：本地仓库和远程仓库**
 
-![maven仓库](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/maven仓库.png)
+![maven仓库分类](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/maven仓库分类.png)
 
 ###### 1、本地仓库
 
