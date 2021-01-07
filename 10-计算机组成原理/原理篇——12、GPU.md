@@ -4,7 +4,7 @@
 
 现在我们电脑里面显示出来的 3D 的画面，其实是 **通过多边形组合出来的**。你可以看看下面这张图，你在玩的各种游戏，里面的人物的脸，并不是那个相机或者摄像头拍出来的，而是通过多边形建模（Polygon Modeling）创建出来的。
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/0777aed6775051cfd83d0bb512de8722.png" alt="0777aed6775051cfd83d0bb512de8722" style="zoom: 33%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/0777aed6775051cfd83d0bb512de8722.png" alt="0777aed6775051cfd83d0bb512de8722" style="zoom: 50%;" />
 
 而实际这些人物在画面里面的移动、动作，乃至根据光线发生的变化，都是通过计算机根据图形学的各种计算，实时渲染出来的。
 
@@ -84,6 +84,33 @@
 
 **（1）芯片瘦身**
 
+现代 CPU 里的晶体管变得越来越多，越来越复杂，其实已经不是用来实现“计算”这个核心功能，而是拿来实现处理乱序执行、进行分支预测，以及高速缓存部分。而在 GPU 里，这些电路就显得有点多余了，GPU 的整个处理过程是一个流式处理（Stream Processing）的过程。因为没有那么多分支条件，或者复杂的依赖关系，可以把 GPU 里这些对应的电路都可以去掉，做一次小小的瘦身，**只留下取指令、指令译码、ALU 以及执行这些计算需要的寄存器和缓存** 就好了。一般来说，这些电路抽象成三个部分，就是**取指令和指令译码**、**ALU** 和 **执行上下文**。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/4c153ac45915fbf3985d24b092894b9d.jpeg" alt="4c153ac45915fbf3985d24b092894b9d" style="zoom:25%;" />
+
 **（2）多核并行和SIMT**
 
+无论是对多边形里的顶点进行处理，还是屏幕里面的每一个像素进行处理，每个点的计算都是独立的。所以，简单地 **添加多核的 GPU**，**就能做到并行加速**。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/3d0859652adf9e3c0305e8e8517b47ac.jpeg" alt="3d0859652adf9e3c0305e8e8517b47ac" style="zoom:25%;" />
+
+CPU 里有一种叫作 SIMD 的处理技术。这个技术是说，在做向量计算的时候，我们要执行的指令是一样的，只是同一个指令的数据有所不同而已。
+
+无论是顶点去进行线性变换，还是屏幕上临近像素点的光照和上色，都是在用相同的指令流程进行计算。所以，GPU 就借鉴了 CPU 里面的 SIMD，用了一种叫作 **SIMT（Single Instruction，Multiple Threads）**的技术。SIMT 比 SIMD 更加灵活。在 SIMD 里面，CPU 一次性取出了固定长度的多个数据，放到寄存器里面，用一个指令去执行。而 SIMT，可以把多条数据，交给不同的线程去处理。
+
+**GPU 在取指令和指令译码的阶段，取出的指令可以给到后面多个不同的 ALU 并行进行运算。这样，我们的一个 GPU 的核里，就可以放下更多的 ALU，同时进行更多的并行运算了。**
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/3d7ce9c053815f6a32a6fbf6f7fb9628.jpeg" alt="3d7ce9c053815f6a32a6fbf6f7fb9628" style="zoom:25%;" />
+
 **（3）超线程**
+
+GPU 里的指令，可能会遇到和 CPU 类似的“流水线停顿”问题。想到流水线停顿，你应该就能记起，我们之前在 CPU 里面讲过超线程技术。在 GPU 上，我们一样可以做类似的事情，也就是遇到停顿的时候，调度一些别的计算任务给当前的 ALU。
+
+和超线程一样，既然要调度一个不同的任务过来，我们就需要针对这个任务，提供更多的执行上下文。所以，一个 Core 里面的执行上下文的数量，需要比 ALU 多。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/c971c34e0456dea9e4a87857880bb5b8-20210107222806881.jpeg" alt="c971c34e0456dea9e4a87857880bb5b8" style="zoom:25%;" />
+
+
+
+总结：**一方面，GPU 是一个可以进行“通用计算”的框架，我们可以通过编程，在 GPU 上实现不同的算法。另一方面，现在的深度学习计算，都是超大的向量和矩阵，海量的训练样本的计算。整个计算过程中，没有复杂的逻辑和分支，非常适合 GPU 这样并行、计算能力强的架构。**
+
