@@ -58,25 +58,25 @@ Maven仓库是基于简单文件系统存储的，集中化管理构件(java api
 
 本地仓库就是本地的一个目录，用于缓存远程库下载的构件以及自己本地生成的构件。（全局生效，修改maven目录下conf/settings.xml文件）
 
-```
- <!-- 本地仓库配置 -->
-  <localRepository>具体的本地仓库位置</localRepository>
+```xml
+<!-- 本地仓库配置 -->
+<localRepository>具体的本地仓库位置</localRepository>
 ```
 
 ###### 2、镜像仓库配置
 
 镜像的主要目的是替换原来远程仓库访问达到较快的访问速度，如阿里云的公共仓库替换中央仓库的访问。（全局生效，修改maven目录下conf/settings.xml文件）
 
-```
- <mirror>
-      <!-- 镜像的id，可以自己指定-->
-      <id>aliyunmaven</id>
-      <!-- 匹配模式  这里的central是默认中央仓库的id -->
-      <mirrorOf>central</mirrorOf>
-      <!-- 镜像名称，可以自己指定 -->
-      <name>阿里云公共仓库</name>
-      <!-- 镜像路径 -->
-      <url>https://maven.aliyun.com/repository/public</url>
+```xml
+<mirror>
+    <!-- 镜像的id，可以自己指定-->
+    <id>aliyunmaven</id>
+    <!-- 匹配模式  这里的central是默认中央仓库的id -->
+    <mirrorOf>central</mirrorOf>
+    <!-- 镜像名称，可以自己指定 -->
+    <name>阿里云公共仓库</name>
+    <!-- 镜像路径 -->
+    <url>https://maven.aliyun.com/repository/public</url>
 </mirror>
 ```
 >mirrorOf 标签里面放置的是 repository 配置的 id,为了满足一些复杂的需求，Maven还支持更高级的镜像配置：
@@ -89,7 +89,7 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
 
 （1）local pom.xml 配置
 
-```
+```xml
 <repositories>    
     <repository>      
        <id>nexus</id>      
@@ -106,7 +106,7 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
 
 （2）setting.xml 文件配置
 
-```
+```xml
 <profiles>
 <profile>
     <id>my</id>
@@ -145,25 +145,25 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
 
 指定编译和运行时的jdk，这里是全局性的，也可以在具体的maven项目中指定某个版本的jdk。
 
-```
+```xml
 <profile>
-        <id>jdk-1.8</id>
-        <activation>
-            <activeByDefault>true</activeByDefault>
-            <jdk>1.8</jdk>
-        </activation>
-        <properties>
-            <maven.compiler.source>1.8</maven.compiler.source>
-            <maven.compiler.target>1.8</maven.compiler.target>
-            <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-        </properties>
+    <id>jdk-1.8</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+        <jdk>1.8</jdk>
+    </activation>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    </properties>
 </profile>
 
 ```
 
 ##### 四、工程类型以及工程结构
 
-```
+```xml
     <groupId>com.test.ly</groupId>
     <artifactId>MavenDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -174,26 +174,26 @@ repo,repo1      远程仓库 repo 和 repo1 从该镜像获取
 
 POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar包的版本控制。
 
-```
-    <modules>
-        <module>SubModule</module>
-        <module>SubWeb</module>
-    </modules>
+```xml
+<modules>
+    <module>SubModule</module>
+    <module>SubWeb</module>
+</modules>
 
 
-    <properties>
-        <mybatis.version>3.5.4</mybatis.version>
-    </properties>
+<properties>
+    <mybatis.version>3.5.4</mybatis.version>
+</properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
 
 ###### 2、JAR工程
@@ -225,14 +225,14 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
 
 依赖很简单，就是说工程需要依赖什么构件(jar)，代码示例如下：
 
-```
-    <dependencies>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.4</version>
-        </dependency>
-    </dependencies>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.5.4</version>
+    </dependency>
+</dependencies>
 ```
 **依赖具有传递性**，如果A工程依赖了B工程，而B工程依赖了xx.jar，那么xx.jar也会加入到A工程中，这个很好理解。
 
@@ -241,31 +241,32 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
 **(2)最先声明原则** 举例：先是a->b->e(1.0)，然后a->c->e(2.0)，那么生效的e是1.0版本。
 
 **排除依赖**，有些情况下，我们不希望引入因为传递性引入的一些jar包，因为版本不可靠等原因，我们可以对具体的一些jar包进行排除不让它们被传递引入进来。
-```
+```xml
 <dependencies>
-        <dependency>
-            <groupId>xxx.xx</groupId>
-            <artifactId>xxx</artifactId>
-            <version>1.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>yyy.yy</groupId>
-                    <artifactId>yy</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>xxx.xx</groupId>
+        <artifactId>xxx</artifactId>
+        <version>1.0</version>
+        <exclusions>
+            <exclusion>
+                <groupId>yyy.yy</groupId>
+                <artifactId>yy</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+</dependencies>
 ```
 **依赖范围**，依赖的范围就是决定了依赖的构件什么时候生效，什么时候无效。
-```
+
+```xml
 <dependencies>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.4</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.5.4</version>
+        <scope>compile</scope>
+    </dependency>
+</dependencies>
 ```
 **(1)compile**  这是默认范围，表示该依赖在编译和运行是都生效。
 **(2)provided**  已提供依赖范围。使用此依赖范围典型例子servlet-api，编译和测试项目的时候需要该依赖，但在运行项目的时候，由于容器已经提供，就不需要maven提供引入了。
@@ -273,17 +274,18 @@ POM工程是逻辑工程，用在父级工程或聚合工程中，用来做jar�
 **(4)system**  与provided类似，不过必须显示指定一个本地系统路径的jar，此类依赖一直有效，maven不会去仓库中寻找它。但是，使用system范围依赖时，必须通过systemPath元素显示地指定依赖文件的路径。
 **(5)test**  使用此范围的依赖，只在编译测试代码和运行测试代码的时候需要，应用的正常运行不需要此类依赖。典型的例子就是junit。
 **(6)import**  用于pom文件中<dependencyManagement>部分，主要是强制子工程必须使用父工程中的指定版本。
-```
- <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
+```xml
+<dependencyManagement>
+     <dependencies>
+         <dependency>
+             <groupId>org.mybatis</groupId>
+             <artifactId>mybatis</artifactId>
+             <version>${mybatis.version}</version>
+             <scope>import</scope>
+         </dependency>
+     </dependencies>
+</dependencyManagement>
 ```
 
 ###### 2、继承
