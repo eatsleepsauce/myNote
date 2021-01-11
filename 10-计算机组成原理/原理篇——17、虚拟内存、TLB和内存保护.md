@@ -18,7 +18,7 @@
 
 做地址转换的页表，只需要保留虚拟内存地址的页号和物理内存地址的页号之间的映射关系就可以了。**同一个页里面的内存，在物理层面是连续的**。以一个页的大小是 4K 字节（4KB）为例，我们需要 20 位的高位，12 位的低位（32位）。
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/07cd4c3344690055240f215404a286dd.jpeg" alt="07cd4c3344690055240f215404a286dd" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/07cd4c3344690055240f215404a286dd.jpeg" alt="07cd4c3344690055240f215404a286dd" style="zoom: 33%;" />
 
 内存地址转换，其实就是这样三个步骤：
 
@@ -40,7 +40,7 @@
 
 **多级页表（Multi-Level Page Table）**的解决方案，我们以一个 4 级的多级页表为例，来看一下。同样一个虚拟内存地址，偏移量的部分和上面简单页表一样不变，但是原先的页号部分，我们把它拆成四段，从高到低，分成 4 级到 1 级这样 4 个页表索引。
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/614034116a840ef565feda078d73cb76.jpeg" alt="614034116a840ef565feda078d73cb76" style="zoom:33%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/614034116a840ef565feda078d73cb76.jpeg" alt="614034116a840ef565feda078d73cb76" style="zoom: 25%;" />
 
 最后一层的 1 级页表里面的条目，对应的数据内容就是物理页号了。在拿到了物理页号之后，我们同样可以用“页号 + 偏移量”的方式，来获取最终的物理内存地址。
 
@@ -48,7 +48,7 @@
 
 **多级页表就像一个多叉树的数据结构**，所以我们常常称它为 **页表树（Page Table Tree）**。因为虚拟内存地址分布的连续性，树的第一层节点的指针，很多就是空的，也就不需要有对应的子树了。所谓不需要子树，其实就是不需要对应的 2 级、3 级的页表。找到最终的物理页号，就好像通过一个特定的访问路径，走到树最底层的叶子节点。
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/5ba17a3ecf3f9ce4a65546de480fcc4e.jpeg" alt="5ba17a3ecf3f9ce4a65546de480fcc4e" style="zoom:33%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/5ba17a3ecf3f9ce4a65546de480fcc4e.jpeg" alt="5ba17a3ecf3f9ce4a65546de480fcc4e" style="zoom: 25%;" />
 
 4 级的多级页表来看，每一级如果都用 5 个比特表示。那么每一张某 1 级的页表，只需要 2^5=32 个条目。如果每个条目还是 4 个字节，那么一共需要 128 个字节。而一个 1 级索引表，对应 32 个 4KB 的也就是 128KB 的大小。一个填满的 2 级索引表，对应的就是 32 个 1 级索引表，也就是 4MB 的大小。
 
