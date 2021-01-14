@@ -1,10 +1,8 @@
 #### 系统调用
 
-**glibc对系统调用的封装**，linux提供了glibc这个中介，将系统调用封装成更加友好的接口，供我们调用。
+glibc对系统调用的封装，linux提供了glibc这个中介，将系统调用封装成更加友好的接口，供我们调用。glibc中有个文件 syscalls.list 里面列着所有glibc的函数对应的系统调用。
 
-glibc中有个文件syscalls.list 里面列着所有glibc的函数对应的系统调用。
-
-glibc还有一个脚本 make-syscall.sh，根据syscall.list里面的配置对于每个封装好的系统调用生成一个文件，这个文件里面定义了一些宏，比如 #define SYSCALL_NAME open，这个宏被glibc的另一个文件syscall-template.S使用，而宏里面定义了系统调用的调用方式，显示任何一个系统调用最终都会调用DO_CALL这个宏，对于32位和64位 DO_CALL 的定义是不一样的。
+glibc还有一个脚本 make-syscall.sh，根据 syscall.list 里面的配置对于每个封装好的系统调用生成一个文件，这个文件里面定义了一些宏，比如 #define SYSCALL_NAME open，这个宏被glibc的另一个文件syscall-template.S使用，而宏里面定义了系统调用的调用方式，显示任何一个系统调用最终都会调用DO_CALL这个宏，对于32位和64位 DO_CALL 的定义是不一样的。
 
 ##### 一、32位系统调用
 
@@ -99,7 +97,7 @@ static __always_inline void do_syscall_32_irqs_on(struct pt_regs *regs)
   syscall
 ```
 
-（1）和32位系统调用一样，还是将系统调用名称转换成系统调用号，放到寄存器rax中，不过后面进行了真正调用，该用syscall指令了，而不是使用中断了。传递参数的寄存器也变了。
+（1）和32位系统调用一样，还是将系统调用名称转换成系统调用号，放到寄存器rax中，不过后面进行了真正调用，该用 syscall指令了，而不是使用中断了。传递参数的寄存器也变了。
 
 （2）syscall指令还是使用了一种特殊的寄存器，**特殊模块寄存器(Model specific Register，简称 MSR)**，这种寄存器是CPU为 了完成某些特殊控制功能为目的的寄存器，其中就有系统调用。
 

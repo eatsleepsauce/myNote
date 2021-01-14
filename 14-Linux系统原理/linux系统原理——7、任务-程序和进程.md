@@ -1,6 +1,6 @@
-#### 进程
+#### 程序和进程
 
-##### 一、用系统调用创建进程——写程序
+##### 一、写程序：用系统调用创建进程
 
 （1）安装开发工具，以centOS7操作系统为例:
 
@@ -69,7 +69,9 @@ gcc -c -fPIC process.c
 gcc -c -fPIC createprocess.c
 ```
 
-文件格式：
+###### 1、可重定位文件
+
+**文件格式：**
 
 <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145705.jpg" alt="目标文件.oELF第一种类型.jpg" style="zoom:50%;" />
 
@@ -89,13 +91,13 @@ gcc -c -fPIC createprocess.c
 
 .strtab：字符串表、字符串常量和变量名
 
-这里没有局部变量的原因是，局部变量都放在栈里面，是程序运行过程中随时分配空间，随时释放的。
+**这里没有局部变量的原因是，局部变量都放在栈里面，是程序运行过程中随时分配空间，随时释放的。**
 
 （3）section的元数据信息也需要一个地方保存，就是最后的section header table。在这个表里面，每个section都有一项，在代码里面也有定义 struct elf32_shdr 和 struct elf64_shdr。在ELF的头里面有描述这个文件的section header table的位置，有多少个表项等信息。
 
-可重定位？编译好的代码和变量将来都是加载到内存中的，在内存中都有一定位置，例如create_process函数在process.o的目标文件中，将来被谁调用，在哪儿调用是不清楚的，所以.o里面的位置是不确定的，但是必须是可重定位的。有的section，例如.rel.text，.rel.data就与重定位有关，例如 create process.o里面调用了create_process函数，而这个函数在process.o这个文件里面，因而createprocess.o里面根本不可能知道被调用函数的位置，所以只好在rel.text里面标注，这个函数是需要重定位的。
+可重定位？编译好的代码和变量将来都是加载到内存中的，在内存中都有一定位置，例如create_process函数在process.o的目标文件中，将来被谁调用，在哪儿调用是不清楚的，所以.o里面的位置是不确定的，但是必须是可重定位的。有的section，例如.rel.text，**.rel.data就与重定位有关**，例如 create process.o里面调用了create_process函数，而这个函数在process.o这个文件里面，因而createprocess.o里面根本不可能知道被调用函数的位置，所以只好在rel.text里面标注，这个函数是需要重定位的。
 
-想让create_process这个函数作为库文件被重用，不能以.o的形式存在，而是要形成库文件，最简单的类型是**静态链接库**.a 文件（Archives），仅仅将一系列对象文件(.o)归档为一个文件，使用命令 ar 创建。
+想让create_process这个函数作为库文件被重用，不能以.o的形式存在，而是要形成库文件，最简单的类型是 **静态链接库**.a  文件（Archives），仅仅将一系列对象文件(.o)归档为一个文件，使用命令 ar 创建。
 
 ```
 ar cr libstaticprocess.a process.o
@@ -107,13 +109,17 @@ ar cr libstaticprocess.a process.o
 gcc -o staticcreateprocess createprocess.o -L. -lstaticprocess
 ```
 
-这个命令，-L表示在当前目录下寻找.a文件，-lstaticprocess会自动补全文件名，比如加前缀lib，后缀.a，变成libstaticprocess.a，找个.a文件后，将里面的process.o 取出来与createprocess.o做一个链接，形成二进制可执行文件 staticcreateprocess。在这个链接的过程，重定位就起作用了，原来createprocess.o里面调用了create_process函数，但是不能确定位置，现在将process.o合并了起来就知道位置了。
+这个命令，-L表示在当前目录下寻找.a文件，-lstaticprocess会自动补全文件名，比如加前缀lib，后缀.a，变成libstaticprocess.a，找个.a文件后，将里面的process.o 取出来与createprocess.o做一个链接，形成二进制可执行文件 staticcreateprocess。
+
+在这个链接的过程，重定位就起作用了，原来createprocess.o里面调用了create_process函数，但是不能确定位置，现在将process.o合并了起来就知道位置了。
+
+###### 2、可执行文件
 
 形成的二进制文件叫**可执行文件**，是 **ELF的第二种格式**，格式如下
 
 <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/2020-12-08-145706.jpg" alt="可执行文件ELF的第二种类型.jpg" style="zoom:50%;" />
 
-这个格式和.o文件大致相似，静态链接库一旦链接进去，代码和变量的section都合并了，因而程序运行的时候，就不依赖这个库是否存在。但是这样有一个缺点，就是相同的代码段，如果被多个程序使用的话，在内存里面就有多份，一旦静态链接库更新了，如果二进制可执行文件不重新编译，也就不会随着更新了。
+这个格式和.o文件大致相似，**静态链接库一旦链接进去，代码和变量的section都合并了**，因而程序运行的时候，就不依赖这个库是否存在。但是这样有一个缺点，就是相同的代码段，如果被多个程序使用的话，在内存里面就有多份，一旦静态链接库更新了，如果二进制可执行文件不重新编译，也就不会随着更新了。
 
 与静态链接库相对的，有个叫 **动态链接库（Shared Libraries）**，不仅仅是一组对象文件的简单归档，而是多个对象文件的重新组合，可被多个程序共享。
 
@@ -128,6 +134,8 @@ gcc -o dynamiccreateprocess createprocess.o -L. -ldynamicprocess
 ```
 
 当运行这个程序的时候，首先寻找动态链接库，然后加载它，默认情况下，系统在/lib和/usr/lib文件夹下寻找动态链接库。如果找不到就会报错，我们可以设定LD_LIBRARY_PATH环境变量，程序运行的时候会在此环境变量指定的文件夹下寻找动态链接库。
+
+###### 3、共享对象文件
 
 **动态链接库，就是 ELF的第三种类型，共享对象文件（Shared Object）.so文件**。
 
