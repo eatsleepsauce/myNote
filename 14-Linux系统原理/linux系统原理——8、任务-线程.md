@@ -6,7 +6,7 @@
 
 代码示例：
 
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -122,7 +122,7 @@ void *pthread_getspecific(pthread_key_t key)
 
 示例代码：
 
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -195,7 +195,7 @@ Mutex 互斥锁使用流程示意：
 
 ###### **2、条件变量和互斥锁配合使用**
 
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
