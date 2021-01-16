@@ -1,4 +1,4 @@
-#### 七、用户与权限
+#### 用户与权限
 
 **如何查看有哪些用户**
 在/etc/passwd  和 /etc/shadow中可以查看到
@@ -6,7 +6,7 @@
 **验证有没有用户**
 id  yonghu 
 
-##### 1、用户创建和删除
+##### 一、用户创建和删除
 
 useradd  yonghu  // 创建用户，也会默认创建一个名为yonghu的组
 userdel yonghu  // 删除用户，还可以添加 -r 选项，能够删除用户数据
@@ -18,17 +18,17 @@ passwd yonghu  // 给用户设置密码，直接passwd就是设置当前账号�
 usermod  // 修改用户属性，如用户到家目录
 chage  // 修改用户属性，主要修改用户到生命周期
 
-##### 2、用户组创建和删除
+##### 二、用户组创建和删除
 
 groupadd  // 创建组织
 groupdel  // 删除组织
 usermod -G groupname yonghu  // 把用户加到groupname组织中
 
-##### 3、用户切换
+##### 三、用户切换
 
-sudo  以自己的身份运行其他用户可以执行的命令，不需要其他用户的密码，避免了密码泄漏，例如，普通用户临时获取root权限执行命令，需要使用visudo配置使用sudo的用户(组)
+**sudo  以自己的身份运行其他用户可以执行的命令，不需要其他用户的密码，避免了密码泄漏**，例如，普通用户临时获取root权限执行命令，需要使用visudo配置使用sudo的用户(组)
 
-```
+```shell
 ## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)
 #includedir /etc/sudoers.dllow root to run any commands anywhere
 root    ALL=(ALL)       ALL
@@ -54,9 +54,9 @@ root    ALL=(ALL)       ALL
 #includedir /etc/sudoers.d
 ```
 
-su  su - username 使用login shell 方式切换用户(带 - 切换后进去的是自己的家目录)
+**su，su - username 使用login shell 方式切换用户(带 - 切换后进去的是自己的家目录)**
 
-##### 4、用户和用户组的配置文件
+##### 四、用户和用户组的配置文件
 
 /etc/passwd 保存用户信息
 /etc/shadow  保存用户密码信息

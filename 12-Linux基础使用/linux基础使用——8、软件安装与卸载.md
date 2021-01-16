@@ -1,6 +1,6 @@
-#### 八、软件安装与卸载
+#### 软件安装与卸载
 
-##### 1、rpm 安装 和 卸载
+##### 一、rpm 安装 和 卸载
 
 rpm -ivh filename // 安装  --prefix path // 指定目录安装
 
@@ -23,7 +23,7 @@ rpm -qf /path/to/somefile  // 查询指定文件由哪个安装包产生
 rpm -qf /sbin/ifconfig
 ```
 
-##### 2、yum安装与配置
+##### 二、yum安装与配置
 
 yum( yellow dog updater,Modified) 是一个shell前端软件包管理器，基于rpm包管理，能够从**指定的服务器**自动下载rpm包并且安装，可以自动处理依赖关系，并且一次性安装所有依赖的软件包，无须繁琐地一次次下载、安装。
 **配置yum源：**
@@ -40,11 +40,11 @@ yum( yellow dog updater,Modified) 是一个shell前端软件包管理器，基�
 - list|grouplist 查看软件包 yum list
 - update 升级软件包 yum update (可带软件包名，只升级具体的软件包，不带默认检查所有)
 
-##### 3、其它方式安装
+##### 三、其它方式安装
 
 - 二进制安装
 - 源代码编译安装 ，有时yum仓库里面没有最新的包，这时候就需要编译源码安装了。
   下载软件包，wget 资源地址
 
-##### 4、内核升级？？？
+##### 四、内核升级？？？
 
