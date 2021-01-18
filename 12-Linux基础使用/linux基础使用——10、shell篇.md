@@ -1,10 +1,10 @@
+
+
 #### shell
 
 Shell 是命令解释器，用于解释用户用对操作系统的操作。
 
 cat /etc/shells 查看系统中有多少种shell
-
-
 
 linux的启动过程
 
@@ -33,7 +33,7 @@ ls
 
 
 
-5、shell脚本
+5、**shell脚本**
 
 一条命令只做一件事
 
@@ -67,7 +67,7 @@ ls
 
 bash test.sh  或者 ./test.sh 或者 source ./test.sh. 或者 .filename.sh
 
-6、不同脚本执行方式的影响
+6、**不同脚本执行方式的影响**
 
 1、bash test.sh ，可以不用赋予执行权限，执行脚本的时候产生了新的进程，当前进程没影响
 
@@ -205,7 +205,7 @@ echo $a
 环境变量，每个shell打开都可以获得到的变量
 
 - set 和 env命令
-- $? $$ $0 预定义变量，$? 上一条命令是否执行成功，$$ 当前进程的pid，$0 当前进程的名称。
+- $? $$ $0 预定义变量，$? 上一条命令执行结果，$$ 当前进程的pid，$0 当前进程的名称。
 - $path 环境变量PATH
 - $PS1
 
@@ -242,6 +242,300 @@ PATH=$PATH:/root  # 当前shell和子shell生效，对其它shell不生效
 <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116000549963.png" alt="image-20210116000549963" style="zoom: 50%;" />
 
 **修改完了不是立即生效，可以使用 exit 退出当前shell进程，或者  使用 source 配置文件名，让配置文件生效。**
+
+9、**数组**
+
+定义数组，IPTS=( 111 333 222 )
+
+显示数组的所有元素，echo ${IPTS[@]}
+
+显示数组元素个数，echo ${#IPTS[@]}
+
+显示数组的第一个元素，echo ${IPTS[0]}
+
+10、**转义和引用**
+
+特殊字符：一个字符不仅有字面意义，还有元意（meta-meaning）
+
+- #注释
+- ; 分号
+- \ 转义字符
+- " 和 ' 引号
+
+单个字符前的转义符号
+
+- \n \r \t 单个字母的转义
+- \\$  \\"  \\\ 单个非字母的转义
+
+常用的引用符号
+
+- " 双引号
+- ' 单引号
+- ` 反引号，主要将命令括起来
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116134108047.png" alt="image-20210116134108047" style="zoom: 50%;" />
+
+单引号和双引号对变量的作用不同。双引号会解释变量。
+
+11、**运算符**
+
+赋值运算符
+
+- =复制运算符，用于算数赋值和字符串赋值
+- 使用unset 取消变量的赋值
+- =除了作为赋值运算符还可以作为测试操作符
+
+算数运算符：
+
+- 基本运算符
+
+- \+ \- \* /  \**(乘方) %
+
+- 使用 expr进行运算（只支持整数，不支持浮点数）
+
+- expr 4 + 5
+
+数字常量：
+
+- let “变量名=变量值”
+- 变量值使用0开头为八进制
+- 变量值使用0x开头为十六进制
+
+双圆括号是let命令的简化
+
+- ((a=10))
+
+- ((a++))
+
+- Echo $((10+20))
+
+  
+
+  <img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116135720479.png" alt="image-20210116135720479" style="zoom:50%;" />
+
+12、**特殊字符**
+
+引号
+
+- ' 完全引用
+
+- " 不完全引用
+
+- ` 执行命令
+
+括号
+
+- 圆括号 ()  (())  $()   单独使用圆括号会产生一个子shell ，(xyz=123)；数组初始化 IPS=(ip1 ip2 ip3)
+- 方括号[]  [[]]  单独使用方括号是测试 或 数组元素功能，两个方括号表示测试表达式。
+- 尖括号 <>  重定向符号
+- 花括号{}， 输出范围 echo {0..9} ，文件复制 cp /etc/passwd{,.bak}
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116141318154.png" alt="image-20210116141318154" style="zoom:50%;" />
+
+
+
+运算和逻辑符号
+
+- \+  -  * / % 算数运算符
+- \> < = 比较运算符
+- && || !  逻辑运算符
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116141630700.png" alt="image-20210116141630700" style="zoom:50%;" />
+
+转义符号
+
+其它符号
+
+- \# 注释符
+- ; 命令分隔符
+- :  空指令
+- .  和 source命令相同
+- ~ 家目录
+- , 分隔目录
+
+13、**测试与判断**
+
+**退出与退出状态：**
+
+（1）exit
+
+（2）exit 10 返回10给shell，返回非0为不正常退出
+
+（3）$? 判断当前shell前一个进程是否正常退出
+
+```
+vim test.sh
+#!/bin/bash
+ppwd
+exit
+
+bash  test.sh
+```
+
+**测试命令test：**
+
+（1）test命令用于检查文件或者比较值
+
+（2）test可以做以下测试：
+
+- 文件测试
+- 整数比较测试
+- 字符串测试 
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116214810834.png" alt="image-20210116214810834" style="zoom: 50%;" />
+
+（3）test测试语句可以简化为 [] 符号
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116214938789.png" alt="image-20210116214938789" style="zoom:50%;" />
+
+（4）[] 符号还有扩展写法 [[]] 支持&&  ||  <  >，[] 不支持直接使用<>，只能用lt gt。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116215122232.png" alt="image-20210116215122232" style="zoom:50%;" />
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116215202334.png" alt="image-20210116215202334" style="zoom:50%;" />
+
+**test中使用 = 等号判断时， 等号左右要有空格。**
+
+可使用man test 查看test的用法。
+
+
+
+**使用if-then 语句：**
+
+```
+if [测试条件成立] 或者 命令执行返回值是否为0
+then 执行相应命令
+fi 结束
+```
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116220125642.png" alt="image-20210116220125642" style="zoom:50%;" />
+
+if 后面跟着命令：
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116220320065.png" alt="image-20210116220320065" style="zoom:50%;" />
+
+
+
+**使用if-then-else语句：**
+
+if-then-else 语句可以在条件不成立时也运行相应的命令
+
+```
+if [测试条件成立] 或者 命令执行返回值为 0
+then 执行相应命令
+elif [测试条件成立]
+then 执行相应命令
+else 测试条件不成立，执行相应命令
+fi 结束
+```
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210116221728247.png" alt="image-20210116221728247" style="zoom:50%;" />
+
+
+
+
+**嵌套if的使用：**
+
+```
+if [测试条件成立]
+then 执行相应命令
+	if [测试条件成立]
+	then 执行相应命令
+	fi
+fi 结束
+```
+
+14、**分支**
+
+case语句和select语句可以构成分支
+
+```
+case "$变量" in
+"情况1"）
+	命令...;;
+"情况2")
+	命令...;;
+* )
+	命令...;;
+esac
+```
+
+15、**循环**
+
+**for 循环：**
+
+```
+for 参数 in 列表
+do 执行的命令
+done封闭一个循环
+```
+
+可以使用反引号 或 $() 方式执行命令，命令的结果当作列表进行处理。
+
+列表中包含多个变量，变量使用空格分隔。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117104804925.png" alt="image-20210117104804925" style="zoom:50%;" />
+
+
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117105025249.png" alt="image-20210117105025249" style="zoom:50%;" />
+
+
+
+**C风格的for：**
+
+```
+for((变量初始化;循环判断条件;变量变化))
+do
+	循环执行的命令
+done
+```
+
+
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117105343741.png" alt="image-20210117105343741" style="zoom:50%;" />
+
+**while循环和until循环：**
+
+while 循环
+
+```
+while test测试是否成立
+do
+	命令
+done
+```
+
+until循环与while循环相反，循环测试为假时，执行循环，为真时循环停止。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117110226414.png" alt="image-20210117110226414" style="zoom:50%;" />
+
+
+
+**循环的嵌套和break、continue语句：**
+
+- 循环和循环可以嵌套
+- 循环中可以嵌套判断，反过来也可以嵌套
+- 循环可以使用break 和 continue 语句在循环中退出
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117111049424.png" alt="image-20210117111049424" style="zoom:50%;" />
+
+
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117111424276.png" alt="image-20210117111424276" style="zoom:50%;" />
+
+**使用循环处理位置参数：**
+
+- 命令行参数可以使用 $1 $2 $3 ……$n 进行读取
+- $0 代表脚本名称
+- $* 和 $@ 代表所有位置参数
+- $# 代表位置参数的数量
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210117112438561.png" alt="image-20210117112438561" style="zoom:50%;" />
+
+
+
+
 
 
 
