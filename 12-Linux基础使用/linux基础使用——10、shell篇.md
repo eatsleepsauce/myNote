@@ -535,7 +535,41 @@ until循环与while循环相反，循环测试为假时，执行循环，为真�
 
 
 
+16、自定义函数
+
+函数的定义
+
+```
+function fname(){
+命令
+}
+```
+
+函数的执行
+
+```
+fname
+```
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-01-25%20%E4%B8%8B%E5%8D%889.41.29.png" alt="屏幕快照 2021-01-25 下午9.41.29" style="zoom: 50%;" />
+
+函数的清除
+
+```
+unset fname
+```
 
 
 
+函数作用范围的变量
+
+```
+local 变量名
+```
+
+函数的参数
+
+```
+$1 $2 $3...$n
+```
 
