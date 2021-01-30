@@ -4,10 +4,6 @@
 
 https://start.spring.io/
 
-http://localhost:8080/actuator/beans actuator监控工具
-
-
-
 ![屏幕快照 2021-01-29 下午10.23.09](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-01-29%20%E4%B8%8B%E5%8D%8810.23.09.png)
 
 
@@ -15,6 +11,27 @@ http://localhost:8080/actuator/beans actuator监控工具
 
 
 ![屏幕快照 2021-01-29 下午10.24.36](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-01-29%20%E4%B8%8B%E5%8D%8810.24.36.png)
+
+
+
+http://localhost:8080/actuator/beans actuator监控工具
+
+![image-20210130213244866](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210130213244866.png)
+
+默认  /actuator/health 和 /actuator/info 可 Web 访问
+
+解禁所有 **Endpoint** 
+
+application.properties / application.yml 中 增加management.endpoints.web.exposure.include=* 
+
+**⽣产环境需谨慎**
+
+```properties
+# 定制开放的endpoint
+management.endpoints.web.exposure.include=beans,health
+```
+
+
 
 
 
