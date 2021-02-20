@@ -53,3 +53,10 @@ redirectPort="8443"URIEncoding="客户端编码"/>
 对于POST方式，表单中的参数值对是通过request body发送给服务器，此时浏览器会根据网页的ContentType("text/html; charset=utf-8")中指定的编码进行对表单中的数据进行编码，然后发给服务器。
 
 在服务器端的程序中我们可以通过Request.setCharacterEncoding()设置编码，然后通过request.getParameter获得正确的数据。这里出现乱码可以通过Request.setCharacterEncoding()直接解决。
+
+
+
+Spring  httpMessageConverter
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcwNDE5MjIwNDQ1NDcx" alt="img" style="zoom: 67%;" />
+
