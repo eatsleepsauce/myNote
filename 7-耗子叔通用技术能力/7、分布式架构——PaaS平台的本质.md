@@ -43,7 +43,7 @@
 
 ##### 三、PaaS平台的总体架构
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/f65ccf66daf8d01d59fa8948c8136c68.png" alt="img" style="zoom:67%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/f65ccf66daf8d01d59fa8948c8136c68.png" alt="img" style="zoom:80%;" />
 
 在 Docker+Kubernetes 层之上，我们看到了两个相关的 PaaS 层。一个是 PaaS 调度层，很多人将其称为 iPaaS；另一个是 PaaS 能力层，通常被称为 aPaaS。没有 PaaS 调度层，PaaS 能力层很难被管理和运维，而没有 PaaS 能力层，PaaS 就失去了提供实际能力的业务价值。
 
@@ -61,7 +61,7 @@
 
 ##### 四、PaaS平台的生产和运维
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/61b89202b59959df224ae8ff29bdf0dd.png" alt="img" style="zoom:67%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/61b89202b59959df224ae8ff29bdf0dd.png" alt="img" style="zoom:80%;" />
 
 从左上开始软件构建，进入软件资产库（Docker Registry+ 一些软件的定义），然后走 DevOps 的流程，通过整体架构控制器进入生产环境，生产环境通过 **控制器操作 Docker+Kubernetes 集群进行软件部署和生产变更**。
 
@@ -73,4 +73,5 @@
 
 IaaS、PaaS、Saas  https://www.jianshu.com/p/76987116ef91
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/11464107-ba4bd72316850c0a.jpg" alt="img" style="zoom:50%;" />
+
+
