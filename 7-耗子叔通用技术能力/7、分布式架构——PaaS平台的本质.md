@@ -73,5 +73,5 @@
 
 IaaS、PaaS、Saas  https://www.jianshu.com/p/76987116ef91
 
-
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/iaas-paas-saas-comparison.jpg" alt="iaas-paas-saas-comparison" style="zoom:67%;" />
 
