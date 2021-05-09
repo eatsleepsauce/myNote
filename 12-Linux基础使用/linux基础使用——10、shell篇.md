@@ -1,12 +1,8 @@
 
 
-#### shell
+#### SHELL
 
-Shell 是命令解释器，用于解释用户用对操作系统的操作。
-
-cat /etc/shells 查看系统中有多少种shell
-
-linux的启动过程
+##### 一、linux的启动过程
 
 BIOS- MBR - BOOTLOADER(grub) - kernel - systemd - 系统初始化 - shell
 
@@ -31,11 +27,17 @@ cd /etc/systemd/system
 ls 
 ```
 
+##### 二、**shell脚本**
+
+Shell 是命令解释器，用于解释用户用对操作系统的操作。一条命令只做一件事。
+
+cat /etc/shells 查看系统中有多少种shell
+
+```shell
+cat /etc/shells
+```
 
 
-5、**shell脚本**
-
-一条命令只做一件事
 
 为了组合命令和多次执行，使用脚本文件来保存需要执行的命令
 

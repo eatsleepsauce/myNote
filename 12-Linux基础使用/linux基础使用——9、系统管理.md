@@ -2,11 +2,13 @@
 
 ##### 一、网络管理
 
-**(1)、网络状态查看**  **网络状态查看工具**，常用两种net-tools和iproute  **net-tools**
+###### **1、网络状态查看**  
+
+**网络状态查看工具**，常用两种net-tools和iproute  **net-tools**
 
 （1）查网卡信息，命令 ifconfig (普通用户执行命令 /sbin/ifconfig)，ifconfig eth0 查看具体网卡信息。  eth0 第一块网卡名称（网络接口），第一个网络接口还有可能是以下名字：  eno1 板载网卡  ens33 PCI-E网卡  enp0s3 无法获取物理信息的PCI-E 网卡  *CentOS 7 使用了一致网络设备命名，以上都不匹配则使用 eth0。*  网络接口名称修改，网卡命名规则受biosdevname和net.ifnames两个参数影响，如果想网卡命名为eth0，可以编辑 /etc/default/grub文件，增加biosdevname=0 net.ifnames=0，更新grub，命令 grub2-mkconfig -o /boot/grub2/grub.cfg，最后重启，命令 reboot。
 
-（2）查看网卡物流链接情况，命令 mii-tool eth0(网卡名称)
+（2）查看网卡链接情况，命令 mii-tool eth0(网卡名称)
 
 （3）查看网关信息，命令 route ，route -n，使用 -n参数不解析主机名，因为ip解析成主机名会浪费时间，正常可以不解析主机名。
 

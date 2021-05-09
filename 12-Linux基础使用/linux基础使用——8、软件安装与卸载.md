@@ -2,22 +2,22 @@
 
 ##### 一、rpm 安装 和 卸载
 
-rpm -ivh filename // 安装  --prefix path // 指定目录安装
+- rpm -ivh filename // 安装  --prefix path // 指定目录安装
 
-```
+```shell
 rpm -ivh --prefix /usr/ceshi  xxxx.rpm
 ```
 
-rpm -e 包名 // 卸载
-rpm -qa 查看已经安装的包
-rpm -q 包名 // 查看包有没有安装
-rpm -qi 包名 // 查询指定包的说明信息
-rpm -ql 包名 // 查询指定包安装后生成的文件列表
-rpm -qc 包名 // 查询指定包安装的配置文档
-rpm -qd 包名 // 查询指定包安装的帮助文档
-rpm -q --scripts // 查询指定包中包含的脚本
-rpm -qa | grep java | xargs rpm -e --nodeps
-rpm -qf /path/to/somefile  // 查询指定文件由哪个安装包产生
+- rpm -e 包名 // 卸载
+- rpm -qa 查看已经安装的包
+- rpm -q 包名 // 查看包有没有安装
+- rpm -qi 包名 // 查询指定包的说明信息
+- rpm -ql 包名 // 查询指定包安装后生成的文件列表
+- rpm -qc 包名 // 查询指定包安装的配置文档
+- rpm -qd 包名 // 查询指定包安装的帮助文档
+- rpm -q --scripts // 查询指定包中包含的脚本
+- rpm -qa | grep java | xargs rpm -e --nodeps
+  rpm -qf /path/to/somefile  // 查询指定文件由哪个安装包产生
 
 ```
 rpm -qf /sbin/ifconfig
