@@ -195,6 +195,8 @@ int main(int arg, char *argv[])
 
 ##### 五、SELinux 简介
 
+安全增强型 Linux（Security-Enhanced Linux）简称 SELinux，它是一个 Linux 内核模块，也是 Linux 的一个安全子系统。SELinux 主要作用就是最大限度地减小系统中服务进程可访问的资源（最小权限原则）。
+
 - MAC（强制访问控制）与 DAC（⾃主访问控制）
 - 查看 SELinux 的命令
   - getenforce
@@ -301,19 +303,13 @@ RAID的常见级别及含义：
 
 RAID卡帮我们实现了磁盘的访问，我们工作中使用的也是RAID卡(RAID控制器)
 
-
-
-软件RAID的使用(工作中不使用)：
-
-mdadm
+软件RAID的使用(工作中不使用)：mdadm
 
 ###### 7、逻辑卷管理LVM
 
 - 逻辑卷和文件系统的关系
 - 为linux创建逻辑卷
 - 动态扩容逻辑卷
-
-
 
 ##### 七、系统综合状态查看
 

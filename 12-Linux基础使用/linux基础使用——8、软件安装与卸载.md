@@ -117,6 +117,10 @@ CentOS yum 源  http://mirror.centos.org/centos/7/
 
 ###### 1、grub是什么
 
+GRUB是GRand Unified Bootloader的缩写，它是一个多重操作系统启动管理器。用来引导不同系统，如[windows](https://baike.baidu.com/item/windows/165458)，[linux](https://baike.baidu.com/item/linux/27050)。
+
+GRUB是多启动规范的实现，它允许用户可以在计算机内同时拥有多个操作系统，并在计算机启动时选择希望运行的操作系统。
+
 ###### 2、grub配置文件
 
 - /etc/default/grub 默认配置文件
