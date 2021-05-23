@@ -4,7 +4,7 @@
 
 TCP全名是(Transport Control Protocol)，是一个可以提供可靠的、支持全双工、连接导向的协议，因此在客户端和服务端之间传输数据的时候，是必须先建立一个连接的。
 
-![image-20210523155811815](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523155811815.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523155811815.png" alt="image-20210523155811815" style="zoom:50%;" />
 
 ###### 1、什么连接
 
@@ -21,13 +21,13 @@ TCP全名是(Transport Control Protocol)，是一个可以提供可靠的、支�
 - 半双工：允许数据在两个方向上传输，在某一时刻，只允许数据在一个方向上传输
 - 全双工：任何时刻都能双向发送数据
 
-![image-20210523160137432](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523160137432.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523160137432.png" alt="image-20210523160137432" style="zoom:50%;" />
 
 ###### 3、如何保证可靠
 
 可靠性指数据保证无损传输。
 
-![image-20210523160301025](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523160301025.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523160301025.png" alt="image-20210523160301025" style="zoom:50%;" />
 
 ##### 二、TCP协议的工作过程
 
@@ -38,7 +38,7 @@ TCP全名是(Transport Control Protocol)，是一个可以提供可靠的、支�
 - 服务端针对客户端的SYN给ACK，服务端发送SYN。
 - 客服端转变就绪，客户端发送ACK
 
-![image-20210523160420800](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523160420800.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523160420800.png" alt="image-20210523160420800" style="zoom:50%;" />
 
 ###### 2、断开连接的过程（四次挥手）
 
@@ -47,27 +47,31 @@ TCP全名是(Transport Control Protocol)，是一个可以提供可靠的、支�
 - 服务端经过一个等待（自己的事情处理完），确定可以关闭连接，发送FIN
 - 客户端收到FIN，处理完自己的事情后发送ACK
 
-![image-20210523161617152](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523161617152.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523161617152.png" alt="image-20210523161617152" style="zoom:50%;" />
 
 ###### 3、数据传输
 
-![image-20210523161757661](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523161757661.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523161757661.png" alt="image-20210523161757661" style="zoom:50%;" />
 
 **（1）报文拆分**
 
 - 应用层数据很大时无法一次性传输完
 - 拆分后可实现并行传输
 
-![image-20210523161921992](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523161921992.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523161921992.png" alt="image-20210523161921992" style="zoom:50%;" />
 
 **（2）顺序保证**
 
-![image-20210523162032205](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523162032205.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523162032205.png" alt="image-20210523162032205" style="zoom:50%;" />
 
 - TCP序号：发送序号(Seq)、接收序号(Ack)
 - 一个端的发送序号是另一个端的接受序号
 
-![image-20210523162153415](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523162153415.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523162153415.png" alt="image-20210523162153415" style="zoom:50%;" />
+
++1 是约定，正常seq加的是上次传输的大小，ack 是加收到的大小
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-05-23%20%E4%B8%8B%E5%8D%8810.44.58.png" alt="屏幕快照 2021-05-23 下午10.44.58" style="zoom:50%;" />
 
 **（3）TCP头**
 
@@ -75,7 +79,7 @@ TCP全名是(Transport Control Protocol)，是一个可以提供可靠的、支�
 - 目标端口：描述接收方服务器上的应用
 - 发送序号(Seq)/接收序号(Ack)
 
-![image-20210523162354936](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523162354936.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523162354936.png" alt="image-20210523162354936" style="zoom:50%;" />
 
 TCP头标志位：
 

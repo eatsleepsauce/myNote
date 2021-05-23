@@ -15,26 +15,26 @@ OSI模型指的是Open System Interconnection Reference Model，即开放式系�
 - 应用层位于OSI模型最上方
 - 只关心业务逻辑，不关心数据的传输
 
-![image-20210523152359830](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152359830.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152359830.png" alt="image-20210523152359830" style="zoom:50%;" />
 
 ###### 2、表示层(Presentation Layer)
 
 负责协商用于传输的数据格式，并转换数据格式
 
-![image-20210523152546382](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152546382.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152546382.png" alt="image-20210523152546382" style="zoom:50%;" />
 
 ###### 3、会话层(Session Layer)
 
 - 负责管理两个连接网实体间的连接
 - 功能及特点：建立连接，维持通信，释放连接
 
-![image-20210523152738465](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152738465.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152738465.png" alt="image-20210523152738465" style="zoom:50%;" />
 
 ###### 4、传输层(Transport Layer)
 
 负责将数据从一个实体(一个服务或应用)传输到另一个实体，但不负责数据传输到方式。
 
-![image-20210523152923446](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152923446.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523152923446.png" alt="image-20210523152923446" style="zoom:50%;" />
 
 传输层的能力：
 
@@ -48,7 +48,7 @@ OSI模型指的是Open System Interconnection Reference Model，即开放式系�
 
 负责把一个封包从一个IP地址传输到另一个IP地址
 
-![image-20210523153344993](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523153344993.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523153344993.png" alt="image-20210523153344993" style="zoom:50%;" />
 
 ###### 6、数据链路层(Data Link Layer)
 
@@ -61,13 +61,13 @@ OSI模型指的是Open System Interconnection Reference Model，即开放式系�
 - 封装和隐藏具体的传输手段，并且提供稳定的传输接口
 - 比如：电缆、光纤、蓝牙等
 
-![image-20210523153616333](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523153616333.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523153616333.png" alt="image-20210523153616333" style="zoom:50%;" />
 
 ##### 三、OSI的问题
 
 分层设计较为臃肿，并发每一层都是必要的。
 
-![image-20210523153735786](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523153735786.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523153735786.png" alt="image-20210523153735786" style="zoom:50%;" />
 
 
 

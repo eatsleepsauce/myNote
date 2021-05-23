@@ -4,13 +4,13 @@
 
 IPv4只能支持43亿设备，不够用。目前IPv4是使用的拆分子网：
 
-![image-20210523171452329](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523171452329.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523171452329.png" alt="image-20210523171452329" style="zoom:50%;" />
 
 ##### 二、IPv6的工作原理
 
 IPv6和IPv4工作原理相似，为切片、增加封包头、路由(寻址)几个阶段。
 
-![image-20210523171629987](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523171629987.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523171629987.png" alt="image-20210523171629987" style="zoom:50%;" />
 
 ##### 三、和IPv4的主要区别
 
@@ -21,13 +21,13 @@ IPv6和IPv4工作原理相似，为切片、增加封包头、路由(寻址)几�
   - IPv4的地址用 . 分割，如 103.28.7.35 。每一个是8位，用0-255的数字表示。
   - IPv6的地址用 : 分割，如 0123:4567:89ab:cdef:0123:4567:89ab:cdef 。每个是一个16位的16进制数字，就是4个符。
 
-![image-20210523171922833](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523171922833.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523171922833.png" alt="image-20210523171922833" style="zoom:50%;" />
 
 - 书写方式：IPv6地址可以简写
 
-![image-20210523172042677](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172042677.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172042677.png" alt="image-20210523172042677" style="zoom:50%;" />
 
-![image-20210523172105858](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172105858.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172105858.png" alt="image-20210523172105858" style="zoom:50%;" />
 
 ###### 2、寻址
 
@@ -37,17 +37,17 @@ IPv6和IPv4工作原理相似，为切片、增加封包头、路由(寻址)几�
 - 子网号（Subnet ID)：16bit，用于站点内部区分子网。
 - 接口号（Interface ID)：64bit，用于站点内部区分设备。
 
-![image-20210523172559190](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172559190.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172559190.png" alt="image-20210523172559190" style="zoom:50%;" />
 
 全局单播地址例子：
 
-![image-20210523172700514](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172700514.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172700514.png" alt="image-20210523172700514" style="zoom:50%;" />
 
 **（2）本地单播**
 
 定义：给定地址，本地网定位设备
 
-![image-20210523172752663](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172752663.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523172752663.png" alt="image-20210523172752663" style="zoom:50%;" />
 
 例子：fe80::123e:456d
 
@@ -64,7 +64,7 @@ IPv6和IPv4工作原理相似，为切片、增加封包头、路由(寻址)几�
 
 新设备接入IPv6后，会使用IPv6的邻居发现协议(Neighbour Discover Protocol)为自己申请一个IP地址。当新设备需要发送信息到目的地时，还可以通过ND协议广播查询目标设备。然后如果需要路由，还可以通过ND查找路由器。
 
-![image-20210523173148545](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523173148545.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523173148545.png" alt="image-20210523173148545" style="zoom:50%;" />
 
 传统IPv4：使用ARP协议（Address Resolution Protocol，地址解析协议）。每个节点存储许多额外信息。
 

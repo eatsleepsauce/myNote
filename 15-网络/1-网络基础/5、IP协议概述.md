@@ -6,7 +6,7 @@
 
 IP协议(Internet Protocol)：网络层协议。
 
-![image-20210523163919640](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523163919640.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523163919640.png" alt="image-20210523163919640" style="zoom:50%;" />
 
 ###### 2、IP协议可能遇到的问题
 
@@ -27,14 +27,14 @@ IP协议目前主要有两种架构，IPv4 和 IPv6。
 
 ##### 二、IP协议的工作原理
 
-![image-20210523164520994](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523164520994.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523164520994.png" alt="image-20210523164520994" style="zoom:50%;" />
 
 ###### 1、分片
 
 - 把数据切分成片（Fragmentation）
 - 适配底层传输网络
 
-![image-20210523164734909](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523164734909.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523164734909.png" alt="image-20210523164734909" style="zoom:50%;" />
 
 ###### 2、增加协议头
 
@@ -60,14 +60,14 @@ IP协议目前主要有两种架构，IPv4 和 IPv6。
 
 ###### 4、Type of Service字段
 
-![image-20210523165844714](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523165844714.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523165844714.png" alt="image-20210523165844714" style="zoom:50%;" />
 
 ###### 5、寻址过程
 
 - 寻址：给一个地址，然后找到这个东西
 - IPv4地址(32位)：逐级寻址
 
-![image-20210523170113293](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523170113293.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523170113293.png" alt="image-20210523170113293" style="zoom:50%;" />
 
 例如：103.16.3.1 
 
@@ -94,7 +94,7 @@ IP协议目前主要有两种架构，IPv4 和 IPv6。
 - 若寻找的IP地址不在局域网中，需要路由找到去往对应网络的路径。
 - IP地址和子网掩码位与的过程是由路由算法实现的。
 
-![image-20210523170824138](https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523170824138.png)
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523170824138.png" alt="image-20210523170824138" style="zoom:50%;" />
 
 
 
