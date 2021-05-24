@@ -5,9 +5,9 @@
 - HTTP协议(Hyper Text Transfer Protocol): 应用层协议
 - 目标: 是处理客户端和服务端之间的通信
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523225711713.png" alt="image-20210523225711713" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523225711713.png" alt="image-20210523225711713" style="zoom: 33%;" />
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523225841396.png" alt="image-20210523225841396" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523225841396.png" alt="image-20210523225841396" style="zoom: 33%;" />
 
 
 
@@ -15,13 +15,13 @@
 
 一次请求，分成头(Header)和体(Body)。 下面是一个请求头+消息体的示例：
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523225922443.png" alt="image-20210523225922443" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523225922443.png" alt="image-20210523225922443" style="zoom: 33%;" />
 
 ###### 2、返回
 
 一次返回，也同样分(Header)和体(Body)。 下面是一个返回头+消息体的示例：
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523230001672.png" alt="image-20210523230001672" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210523230001672.png" alt="image-20210523230001672" style="zoom: 33%;" />
 
 ##### 二、请求头和返回头
 
