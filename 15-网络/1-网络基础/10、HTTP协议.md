@@ -149,5 +149,106 @@ HTTP协议通过请求头和返回头控制协议工作。无论请求头还是�
 - 504 – Gateway Timeout(网关超时)
 - 505 – HTTP Version Not Supported（版本不支持)
 
+##### 五、HTTP缓存
+
+###### 1、缓存的工作原理
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-05-24%20%E4%B8%8A%E5%8D%888.51.50.png" alt="屏幕快照 2021-05-24 上午8.51.50" style="zoom:50%;" />
+
+###### 2、缓存条目
+
+通常是Key/Value结构。如HTTP缓存，通常以Key为URL；Value通常不仅仅只包括数据，还会包括一些描述字段，比如缓存的失效时间等。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524085420863.png" alt="image-20210524085420863" style="zoom:50%;" />
+
+###### 3、缓存置换
+
+缓存满了后，每次创建新的缓存条目，就会删除旧的缓存条目。
+
+常见的有LRU（Least recently used）缓存置换算法。
+
+###### 4、Cache-Control HTTP返回头
+
+HTTP缓存最重要的配置项为Cache-Control HTTP 返回头。 不仅浏览器可以缓存，浏览器和服务器之间的HTTP代理服务器也可以缓存。 
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524085752381.png" alt="image-20210524085752381" style="zoom:50%;" />
+
+###### 5、强制缓存
+
+**强制缓存行为是强制执行的，在缓存到期前，一定会使用浏览器的缓存。 **
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524090020989.png" alt="image-20210524090020989" style="zoom:50%;" />
+
+强制缓存，基于时间段的使用示例：
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524090109964.png" alt="image-20210524090109964" style="zoom:50%;" />
+
+如果只允许客户端缓存，则使用private。
+
+强制缓存，基于确定时间的使用示例：
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524090303333.png" alt="image-20210524090303333" style="zoom:50%;" />
+
+如果max-age 和 Expires 都有，则 Expires 会被忽略。
+
+###### 6、协商缓存
+
+协商缓存的行为是基于变更协商的。在缓存条目对应的资源发生生变化前，都使用浏览器缓存。因此协商缓存必须每次都请求服务端.
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524090528731.png" alt="image-20210524090528731" style="zoom:50%;" />
+
+**Etag：**服务端想实现协商缓存时可返回ETag，资源不变，ETag的数值也不会改变。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524090629744.png" alt="image-20210524090629744" style="zoom:50%;" />
+
+**Last-modified（Depreciated）：**基于变更时间的协商缓存方案。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524090813130.png" alt="image-20210524090813130" style="zoom:50%;" />
+
+###### 7、其它缓存
+
+如：LocalStorage、SessionStorage、终端的能力...
+
+##### 六、HTTP连接
+
+利用 Keep-Alive：多次请求复用一个TCP连接。
+
+```
+Keep-Alive: timeout=5, max=1000
+```
+
+###### 1、为什么需要keep-alive
+
+- TCP三次握手，证书和协商密钥的传递。
+- 为了节省网络成本，会考虑多个请求服用一个TCP连接。
+
+###### 2、keep-alive的断开
+
+- 单个请求：请求完成后，在timeout时间内没第二个请求进来则会关闭。
+- 多个请求：在一个请求响应之后，在 timeout 时间内有另一个请求进来，就会利用相同的 TCP 连接继续响应这个请求，直到没有更多请求进来，可以通过 max 字段设定最多响应的请求数。 
+
+###### 3、keep-alive是不是长连接
+
+- keep-alive并不是长连接
+- WebSocket：长连接，提供在HTTP协议退化成TCP协议的方式。让客户端和服务器之间保持很长时间的连接且不中断。
+
+##### 七、代理
+
+代理服务器接收一个请求，然后把请求转发给另一个服务器；从另一个服务器接收结果，然后再返回给请求方。根据工作方式的不同，分成正向代理和反向代理。 
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-05-24%20%E4%B8%8A%E5%8D%889.22.37.png" alt="屏幕快照 2021-05-24 上午9.22.37" style="zoom:50%;" />
+
+###### 1、正向代理
+
+把要请求的网址(资源)发送给代理服务器，由代理服务器向目标发送请求后获取资源再返回给请求方。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524092356408.png" alt="image-20210524092356408" style="zoom:50%;" />
+
+###### 2、反向代理
+
+当请求方向一个网址发送一个请求的时候，请求方意识不到，请求的其实是一个反向代理服务器，这个代理服务器将请求代理给了内部的网络。
+
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524092424086.png" alt="image-20210524092424086" style="zoom:50%;" />
+
 
 
