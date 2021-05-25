@@ -31,13 +31,13 @@ HTTPS主要解决HTTP的安全问题，而HTTP2.0主要解决的是性能问题�
 
 HTTP1.1 keep-alive的问题：
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-05-24%20%E4%B8%8B%E5%8D%889.45.41.png" alt="屏幕快照 2021-05-24 下午9.45.41" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202021-05-24%20%E4%B8%8B%E5%8D%889.45.41.png" alt="屏幕快照 2021-05-24 下午9.45.41" style="zoom: 25%;" />
 
 HTTP2.0不阻塞。
 
 HTTP2.0进行了头部压缩，使用数字代表特定的头。
 
-<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524215230052.png" alt="image-20210524215230052" style="zoom:50%;" />
+<img src="https://liuyang-picbed.oss-cn-shanghai.aliyuncs.com/img/image-20210524215230052.png" alt="image-20210524215230052" style="zoom: 25%;" />
 
 
 
